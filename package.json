@@ -23,6 +23,8 @@
     "@tailwindcss/vite": "catalog:",
     "@unhead/vue": "catalog:frontend",
     "@unocss/reset": "catalog:frontend",
+    "@unovis/ts": "catalog:",
+    "@unovis/vue": "catalog:",
     "@vueuse/core": "catalog:frontend",
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
