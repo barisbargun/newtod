@@ -22,11 +22,11 @@ async function toggleLocales() {
         <p>{{ site.title }}</p>
       </div>
       <nav class="flex justify-center items-center gap-4">
-        <a>
+        <RouterLink icon-btn :to="{ name: '/home' }" :title="t('button.dashboard')">
           <Button>
             {{ t('button.dashboard') }}
           </Button>
-        </a>
+        </RouterLink>
 
         <a icon-btn :title="t('button.toggle_langs')" @click="toggleLocales()">
           <div i-carbon-language />

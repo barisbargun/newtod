@@ -2,6 +2,12 @@
 defineOptions({
   name: 'Home',
 })
+
+const { t } = useI18n()
+
+useHead({
+  title: () => t('button.dashboard'),
+})
 </script>
 
 <template>
