@@ -1,6 +1,4 @@
 <template>
   <HomeNavbar />
-  <main>
-    <RouterView />
-  </main>
+  <RouterView />
 </template>

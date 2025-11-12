@@ -36,7 +36,8 @@
     "tw-animate-css": "catalog:",
     "vue": "catalog:frontend",
     "vue-i18n": "catalog:frontend",
-    "vue-router": "catalog:frontend"
+    "vue-router": "catalog:frontend",
+    "vue-sonner": "catalog:"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",

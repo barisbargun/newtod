@@ -1,7 +1,8 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
-  <p>abc</p>
+  <div class="bg-card">
+    SavedDutiesContainer
+  </div>
 </template>
