@@ -1,10 +1,10 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.7.0",
+  "packageManager": "pnpm@10.19.0",
   "scripts": {
     "build": "vite-ssg build",
-    "dev": "vite --port 3333 --open",
+    "dev": "vite --port 4000 --open",
     "lint": "eslint .",
     "preview": "vite preview",
     "preview-https": "serve dist",
@@ -17,11 +17,23 @@
     "sizecheck": "npx vite-bundle-visualizer"
   },
   "dependencies": {
+    "@nuxt/ui": "catalog:frontend",
+    "@primeuix/themes": "catalog:",
+    "@supabase/supabase-js": "catalog:",
+    "@tailwindcss/vite": "catalog:",
     "@unhead/vue": "catalog:frontend",
     "@unocss/reset": "catalog:frontend",
     "@vueuse/core": "catalog:frontend",
+    "class-variance-authority": "catalog:",
+    "clsx": "catalog:",
+    "lucide-vue-next": "catalog:",
     "nprogress": "catalog:frontend",
     "pinia": "catalog:frontend",
+    "primevue": "catalog:",
+    "reka-ui": "catalog:",
+    "tailwind-merge": "catalog:",
+    "tailwindcss": "catalog:",
+    "tw-animate-css": "catalog:",
     "vue": "catalog:frontend",
     "vue-i18n": "catalog:frontend",
     "vue-router": "catalog:frontend"
@@ -30,8 +42,10 @@
     "@antfu/eslint-config": "catalog:dev",
     "@iconify-json/carbon": "catalog:dev",
     "@intlify/unplugin-vue-i18n": "catalog:build",
+    "@primevue/auto-import-resolver": "catalog:",
     "@shikijs/markdown-it": "catalog:build",
     "@types/markdown-it-link-attributes": "catalog:types",
+    "@types/node": "catalog:",
     "@types/nprogress": "catalog:types",
     "@unocss/eslint-config": "catalog:build",
     "@vitejs/plugin-vue": "catalog:build",
@@ -46,6 +60,8 @@
     "https-localhost": "catalog:dev",
     "lint-staged": "catalog:dev",
     "markdown-it-link-attributes": "catalog:build",
+    "prettier": "catalog:",
+    "prettier-plugin-tailwindcss": "catalog:",
     "rollup": "catalog:build",
     "shiki": "catalog:build",
     "simple-git-hooks": "catalog:dev",
@@ -72,11 +88,5 @@
     "unplugin": "catalog:build",
     "vite": "catalog:build",
     "vite-plugin-inspect": "catalog:build"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
-  },
-  "lint-staged": {
-    "*": "eslint --fix"
   }
 }

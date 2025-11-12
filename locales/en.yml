@@ -1,14 +1,16 @@
 button:
   about: About
   back: Back
+  dashboard: Dashboard
   go: GO
   home: Home
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
 intro:
+  aka: Also known as
   desc: Opinionated Vite Starter Template
   dynamic-route: Demo of dynamic route
   hi: Hi, {name}!
-  aka: Also known as
   whats-your-name: What's your name?
+made_by: Made by barisolgun
 not-found: Not found

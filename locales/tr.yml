@@ -1,14 +1,16 @@
 button:
   about: Hakkımda
   back: Geri
+  dashboard: Kontrol Paneli
   go: İLERİ
   home: Anasayfa
   toggle_dark: Karanlık modu değiştir
   toggle_langs: Dilleri değiştir
 intro:
+  aka: Ayrıca şöyle bilinir
   desc: Görüşlü Vite Başlangıç Şablonu
   dynamic-route: Dinamik rota demosu
   hi: Merhaba, {name}!
-  aka: Ayrıca şöyle bilinir
   whats-your-name: Adınız nedir?
+made_by: barisolgun tarafından yapılmıştır
 not-found: Bulunamadı

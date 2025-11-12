@@ -1,6 +1,8 @@
 import path from 'node:path'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
+import { PrimeVueResolver } from '@primevue/auto-import-resolver'
 import Shiki from '@shikijs/markdown-it'
+import tailwindcss from '@tailwindcss/vite'
 import { unheadVueComposablesImports } from '@unhead/vue'
 import Vue from '@vitejs/plugin-vue'
 import LinkAttributes from 'markdown-it-link-attributes'
@@ -22,6 +24,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
+      '@': path.resolve(__dirname, 'src'),
     },
   },
 
@@ -39,6 +42,7 @@ export default defineConfig({
         }),
       },
     }),
+    tailwindcss(),
 
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
     Layouts(),
@@ -72,6 +76,9 @@ export default defineConfig({
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: 'src/components.d.ts',
+      resolvers: [
+        PrimeVueResolver(),
+      ],
     }),
 
     // https://github.com/antfu/unocss
@@ -106,8 +113,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'safari-pinned-tab.svg'],
       manifest: {
-        name: 'Vitesse',
-        short_name: 'Vitesse',
+        name: 'New App',
+        short_name: 'NApp',
         theme_color: '#ffffff',
         icons: [
           {
@@ -140,6 +147,7 @@ export default defineConfig({
 
     // https://github.com/webfansplz/vite-plugin-vue-devtools
     VueDevTools(),
+
   ],
 
   // https://github.com/vitest-dev/vitest

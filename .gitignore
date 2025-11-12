@@ -9,3 +9,10 @@ node_modules
 *.log
 cypress/downloads
 public/assets/fonts
+
+.vscode/*
+!.vscode/extensions.json
+
+.env
+.env.development
+.env.production

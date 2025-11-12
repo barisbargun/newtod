@@ -1,32 +1,31 @@
+import type { User } from '@supabase/supabase-js'
 import { acceptHMRUpdate, defineStore } from 'pinia'
+import { computed, ref } from 'vue'
 
 export const useUserStore = defineStore('user', () => {
   /**
-   * Current name of the user.
+   * The current authenticated Supabase user.
+   * Will be null if not logged in.
    */
-  const savedName = ref('')
-  const previousNames = ref(new Set<string>())
-
-  const usedNames = computed(() => Array.from(previousNames.value))
-  const otherNames = computed(() => usedNames.value.filter(name => name !== savedName.value))
+  const user = ref<User | null>(null)
 
   /**
-   * Changes the current name of the user and saves the one that was used
-   * before.
-   *
-   * @param name - new name to set
+   * A computed getter to easily check if the user is authenticated.
    */
-  function setNewName(name: string) {
-    if (savedName.value)
-      previousNames.value.add(savedName.value)
+  const isLoggedIn = computed(() => user.value !== null)
 
-    savedName.value = name
+  /**
+   * Sets the current user.
+   * @param newUser The user object from Supabase, or null.
+   */
+  function setUser(newUser: User | null) {
+    user.value = newUser
   }
 
   return {
-    setNewName,
-    otherNames,
-    savedName,
+    user,
+    isLoggedIn,
+    setUser,
   }
 })
 
