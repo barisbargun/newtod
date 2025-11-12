@@ -22,7 +22,6 @@
   textarea {
     @apply resize-none;
   }
-
 }
 
 @utility container {

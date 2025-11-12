@@ -60,8 +60,7 @@ export const createApp = ViteSSG(
 
     const isLoggedIn = !!session
 
-    userStore.setUser(session?.user?.user_metadata ?? null)
-    console.log(session)
+    // userStore.setUser(session?.user?.user_metadata ?? null)
 
     // 2. Listen for future auth changes (login/logout)
     supabase.auth.onAuthStateChange((event, session) => {
@@ -72,7 +71,7 @@ export const createApp = ViteSSG(
     // This guard now runs *after* the initial user state is set
     ctx.router.beforeEach((to, from, next) => {
       // Re-fetch store inside guard just to be safe
-      const store = useUserStore(pinia) // <-- 6. Pass pinia instance directly
+      // const store = useUserStore(pinia) // <-- 6. Pass pinia instance directly
       const requiresAuth = to.meta.requiresAuth
       const requiresGuest = to.meta.requiresGuest
 

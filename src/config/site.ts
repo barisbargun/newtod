@@ -1,3 +1,3 @@
 export const site = {
-  title: "NewTod"
+  title: 'NewTod',
 }

@@ -1,36 +1,12 @@
 <script setup lang="ts">
-import { supabase } from '@/lib/supabaseClient'
-import { onMounted, ref } from 'vue'
-
 defineOptions({
   name: 'Home',
-})
-
-const instruments = ref([])
-
-async function getInstruments() {
-  const { data } = await supabase.from('users').select()
-  console.log('data', data)
-  instruments.value = data
-}
-
-onMounted(() => {
-  getInstruments()
-})
-
-const { t } = useI18n()
-useHead({
-  title: () => t('button.home'),
 })
 </script>
 
 <template>
   <p>Abc</p>
-  <ul>
-    <li v-for="instrument in instruments" :key="instrument.id">
-      {{ instrument }}
-    </li>
-  </ul>
+
   <!-- <div>
     <div text-4xl>
       <div i-carbon-campsite inline-block />

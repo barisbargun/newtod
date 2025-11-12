@@ -88,5 +88,11 @@
     "unplugin": "catalog:build",
     "vite": "catalog:build",
     "vite-plugin-inspect": "catalog:build"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
