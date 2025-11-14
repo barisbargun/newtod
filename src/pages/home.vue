@@ -12,9 +12,9 @@ useHead({
 
 <template>
   <div class="flex justify-between gap-5 w-full flex-1 p-4">
-    <ActivitesPanel class="flex-1/4" />
-    <TimeSchedule class="flex-1/2" />
     <SavedDutiesContainer class="flex-1/4" />
+    <TimeSchedule class="flex-1/2" />
+    <ActivitesPanel class="flex-1/4" />
   </div>
 </template>
 

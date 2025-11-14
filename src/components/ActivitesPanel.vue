@@ -1,8 +1,15 @@
 <script setup lang="ts">
+
 </script>
 
 <template>
-  <div class="bg-card">
-    ActivitiesPanel
-  </div>
+  <Card>
+    <CardHeader class="flex-center! justify-between!">
+      <CardTitle>
+        This Week's Activities
+      </CardTitle>
+    </CardHeader>
+    <CardContent class="flex justify-between relative" />
+    <CardFooter />
+  </Card>
 </template>

@@ -28,11 +28,14 @@
   @apply mx-auto! max-w-[1400px]! px-4 lg:px-8 max-sm:px-4;
 }
 
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
 @theme inline {
   --font-sans: Inter, sans-serif;
   --font-serif: Georgia, serif;
   --font-mono: JetBrains Mono, monospace;
-  --font-sora: Sora, sans-serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -93,7 +96,7 @@
   --primary-foreground: hsl(0 0% 100%);
   --secondary: hsl(249.375 100% 93.7255%);
   --secondary-foreground: hsl(249.375 33.3333% 37.6471%);
-  --muted: hsl(240 50% 96.0784%);
+  --muted: hsl(240 50% 92.0784%);
   --muted-foreground: hsl(240 12.1951% 48.2353%);
   --accent: hsl(218.4615 100% 92.3529%);
   --accent-foreground: hsl(240 27.5862% 22.7451%);

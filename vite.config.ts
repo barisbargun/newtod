@@ -1,6 +1,5 @@
 import path from 'node:path'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
-import { PrimeVueResolver } from '@primevue/auto-import-resolver'
 import Shiki from '@shikijs/markdown-it'
 import tailwindcss from '@tailwindcss/vite'
 import { unheadVueComposablesImports } from '@unhead/vue'
@@ -76,9 +75,6 @@ export default defineConfig({
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: 'src/components.d.ts',
-      resolvers: [
-        PrimeVueResolver(),
-      ],
     }),
 
     // https://github.com/antfu/unocss
