@@ -1,4 +1,4 @@
 <template>
-  <HomeNavbar />
+  <NavbarHome />
   <RouterView />
 </template>

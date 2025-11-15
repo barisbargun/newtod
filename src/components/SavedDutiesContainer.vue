@@ -23,12 +23,13 @@ import { Dumbbell, Pencil, Plus } from 'lucide-vue-next'
           </TabsTrigger>
         </TabsList>
         <TabsContent value="work">
-          <EventCard
+          <CardEvent
             v-for="value in Array.from({ length: 3 })"
             :key="value"
             name="Workout"
             :icon="Dumbbell" :times="3"
             class="not-last:mb-4 w-full"
+            color="#9784eb"
           />
         </TabsContent>
         <TabsContent value="fun">
@@ -40,10 +41,7 @@ import { Dumbbell, Pencil, Plus } from 'lucide-vue-next'
       </Button>
     </CardContent>
     <CardFooter>
-      <Button class="mx-auto">
-        <Plus />
-        Add a New Duty
-      </Button>
+      <DialogNewDuty />
     </CardFooter>
   </Card>
 </template>

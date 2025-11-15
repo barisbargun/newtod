@@ -1,12 +1,12 @@
 <script setup lang="ts" generic="T extends Record<string, any>">
 import type { Component } from 'vue'
 import type { BaseChartProps } from '.'
-import { ChartSingleTooltip, defaultColors } from '@/components/ui/chart'
-import { cn } from '@/lib/utils'
 import { Donut } from '@unovis/ts'
 import { VisDonut, VisSingleContainer } from '@unovis/vue'
 import { useMounted } from '@vueuse/core'
 import { computed, ref } from 'vue'
+import { ChartSingleTooltip, defaultColors } from '@/components/ui/chart'
+import { cn } from '@/lib/utils'
 
 const props = withDefaults(defineProps<Pick<BaseChartProps<T>, 'data' | 'colors' | 'index' | 'margin' | 'showLegend' | 'showTooltip' | 'filterOpacity'> & {
   /**
@@ -69,6 +69,7 @@ const totalValue = computed(() => props.data.reduce((prev, curr) => {
         :items="legendItems"
         :value-formatter="valueFormatter"
         :custom-tooltip="customTooltip"
+        style="background-color: red !important;"
       />
 
       <VisDonut

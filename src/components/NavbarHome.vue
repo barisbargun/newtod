@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Languages, Moon, SunMedium } from 'lucide-vue-next'
 import { site } from '~/config/site'
 
 import { availableLocales, loadLanguageAsync } from '~/modules/i18n'
@@ -24,13 +25,9 @@ async function toggleLocales() {
       <nav class="flex justify-center items-center gap-4">
         <div class="bg-primary size-6 rounded-full" />
 
-        <a icon-btn :title="t('button.toggle_langs')" @click="toggleLocales()">
-          <div i-carbon-language />
-        </a>
+        <Languages class="size-5 cursor-pointer" :title="t('button.toggle_langs')" @click="toggleLocales()" />
+        <component :is="isDark ? SunMedium : Moon" class="size-5 cursor-pointer" :title="t('button.toggle_dark')" @click="toggleDark()" />
 
-        <button icon-btn :title="t('button.toggle_dark')" @click="toggleDark()">
-          <div i="carbon-sun dark:carbon-moon" />
-        </button>
         <!-- Todo: Fill here -->
       </nav>
     </div>

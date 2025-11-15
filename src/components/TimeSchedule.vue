@@ -34,11 +34,11 @@ const duties = ref([
       </Button>
     </CardHeader>
     <CardContent class="grid grid-cols-3 gap-4">
-      <div v-for="duty in duties" :key="duty.time" class="relative flex-center flex-col p-10 bg-red-200 rounded">
+      <div v-for="duty in duties" :key="duty.time" class="flex-center flex-col h-28 bg-red-200 rounded">
         <p>{{ duty.time < 10 ? `0${duty.time}` : duty.time }}:00</p>
-        <div class="bg-background/50 rounded py-0.5 px-1">
+        <div v-if="duty.duty" class="bg-background/50 rounded py-0.5 px-1 relative">
           <p>{{ duty.duty }}</p>
-          <X class="text-red-500 absolute -top-1" />
+          <X class="text-red-500 absolute -top-2 -right-2 size-4 cursor-pointer" title="remove event" />
         </div>
       </div>
     </CardContent>
