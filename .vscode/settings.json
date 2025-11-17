@@ -24,4 +24,5 @@
     "yaml"
   ],
   "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint"
 }

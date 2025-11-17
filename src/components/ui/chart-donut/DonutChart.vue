@@ -23,13 +23,11 @@ const props = withDefaults(defineProps<Pick<BaseChartProps<T>, 'data' | 'colors'
    */
   sortFunction?: (a: any, b: any) => number | undefined
   /**
-   * Controls the formatting for the label.
-   */
-  valueFormatter?: (tick: number, i?: number, ticks?: number[]) => string
-  /**
    * Render custom tooltip component.
    */
   customTooltip?: Component
+
+  totalValue?: number
 }>(), {
   margin: () => ({ top: 0, bottom: 0, left: 0, right: 0 }),
   sortFunction: () => undefined,
@@ -42,7 +40,6 @@ const props = withDefaults(defineProps<Pick<BaseChartProps<T>, 'data' | 'colors'
 type KeyOfT = Extract<keyof T, string>
 type Data = typeof props.data[number]
 
-const valueFormatter = props.valueFormatter ?? ((tick: number) => `${tick}`)
 const category = computed(() => props.category as KeyOfT)
 const index = computed(() => props.index as KeyOfT)
 
@@ -54,10 +51,6 @@ const legendItems = computed(() => props.data.map((item, i) => ({
   color: colors.value[i],
   inactive: false,
 })))
-
-const totalValue = computed(() => props.data.reduce((prev, curr) => {
-  return prev + curr[props.category]
-}, 0))
 </script>
 
 <template>
@@ -67,7 +60,6 @@ const totalValue = computed(() => props.data.reduce((prev, curr) => {
         :selector="Donut.selectors.segment"
         :index="category"
         :items="legendItems"
-        :value-formatter="valueFormatter"
         :custom-tooltip="customTooltip"
         style="background-color: red !important;"
       />
@@ -78,7 +70,8 @@ const totalValue = computed(() => props.data.reduce((prev, curr) => {
         :color="colors"
         :arc-width="type === 'donut' ? 20 : 0"
         :show-background="false"
-        :central-label="type === 'donut' ? valueFormatter(totalValue) : ''"
+        :central-label="type === 'donut' ? `${totalValue} duties` : ''"
+
         :events="{
           [Donut.selectors.segment]: {
             click: (d: Data, ev: PointerEvent, i: number, elements: HTMLElement[]) => {

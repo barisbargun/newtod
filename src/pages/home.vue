@@ -1,12 +1,22 @@
 <script setup lang="ts">
+import { useDutiesStore } from '~/stores/duties'
+import { useTabsStore } from '~/stores/tabs'
+
 defineOptions({
   name: 'Home',
 })
 
 const { t } = useI18n()
+const tabsStore = useTabsStore()
+const dutiesStore = useDutiesStore()
 
 useHead({
   title: () => t('button.dashboard'),
+})
+
+onMounted(() => {
+  tabsStore.fetchTabs()
+  dutiesStore.fetchDuties()
 })
 </script>
 

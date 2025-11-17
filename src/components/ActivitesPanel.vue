@@ -1,14 +1,17 @@
 <script setup lang="ts">
-const data = [
-  { name: 'Jan', total: 50 },
-  { name: 'Feb', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-  { name: 'Mar', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-  { name: 'Apr', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-  { name: 'May', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-  { name: 'Jun', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-]
+import { duties as _duties } from '~/config/data'
 
-const valueFormatter = (tick: number | Date) => typeof tick === 'number' ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}` : ''
+const duties = _duties.sort((a, b) => b.times - a.times)
+
+const totalDuties = computed(() => duties.reduce((prev, curr) => {
+  return prev + curr.times
+}, 0))
+
+const colors = computed(() => duties.map(item => item.color))
+
+function getPercentage(partial: number, total: number) {
+  return ((partial / total) * 100).toFixed()
+}
 </script>
 
 <template>
@@ -18,15 +21,25 @@ const valueFormatter = (tick: number | Date) => typeof tick === 'number' ? `$ ${
         This Week's Activities
       </CardTitle>
     </CardHeader>
-    <CardContent class="flex justify-between relative">
+    <CardContent class="flex justify-between relative mt-[20%]">
       <DonutChart
         index="name"
-        category="total"
-        :data="data"
-        :value-formatter="valueFormatter"
-        :colors="['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'purple']"
+        category="times"
+        :data="duties"
+        :total-value="totalDuties"
+        :colors="colors"
       />
     </CardContent>
-    <CardFooter />
+    <CardFooter class="mt-[25%]">
+      <ul class="w-full">
+        <li v-for="duty in duties" :key="duty.name" class="flex items-center gap-2 not-last:mb-2">
+          <span class="size-3 rounded-full" :style="{ backgroundColor: duty.color }" />
+          <p>{{ duty.name }}</p>
+          <p class="ml-auto text-sm text-muted-foreground">
+            {{ getPercentage(duty.times, totalDuties) }}%
+          </p>
+        </li>
+      </ul>
+    </CardFooter>
   </Card>
 </template>

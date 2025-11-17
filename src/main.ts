@@ -40,9 +40,8 @@ export const createApp = ViteSSG(
 
     // 1. Get the initial session from Supabase
     const { data } = await supabase.auth.getSession()
-    const { session } = data
 
-    const isLoggedIn = !!session
+    const isLoggedIn = !!data.session
 
     // userStore.setUser(session?.user?.user_metadata ?? null)
 
