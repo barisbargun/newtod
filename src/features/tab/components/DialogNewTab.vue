@@ -6,23 +6,26 @@ defineOptions({
 })
 
 const attrs = useAttrs()
+
+const isDialogOpen = ref(false)
+
+function closeDialog() {
+  isDialogOpen.value = false
+}
 </script>
 
 <template>
-  <Dialog>
+  <Dialog :open="isDialogOpen" @update:open="isDialogOpen = $event">
     <DialogTrigger as-child>
       <Button size="icon" variant="ghost" v-bind="attrs">
         <Plus class="size-5 text-primary" />
       </Button>
     </DialogTrigger>
-    <DialogContent class="text-foreground">
+    <DialogContent>
       <DialogHeader>
-        <DialogTitle>Add a new duty</DialogTitle>
-        <DialogDescription>
-          Add a new duty to your schedule.
-        </DialogDescription>
+        <DialogTitle>Add a new tab</DialogTitle>
       </DialogHeader>
-      <FormTabCreate />
+      <FormTabCreate @form-submitted="closeDialog" />
     </DialogContent>
   </Dialog>
 </template>

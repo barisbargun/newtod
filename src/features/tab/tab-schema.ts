@@ -1,9 +1,9 @@
 import z from 'zod'
-import { validationMsg } from '../utils'
+import { validationMsg } from '~/lib/utils'
 
 export const tabCreateSchema = z.object({
   name: z.string()
-    .min(5, validationMsg('min', 5))
+    .min(3, validationMsg('min', 3))
     .max(150, validationMsg('max', 150)),
 })
 
