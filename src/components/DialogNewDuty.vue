@@ -9,7 +9,7 @@
         Add a new duty
       </Button>
     </DialogTrigger>
-    <DialogContent class="text-foreground">
+    <DialogContent>
       <DialogHeader>
         <DialogTitle>Add a new duty</DialogTitle>
         <DialogDescription>

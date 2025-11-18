@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { useTabsStore } from '~/features/tab/tab-store'
 import { useDutiesStore } from '~/stores/duties'
-import { useTabsStore } from '~/stores/tabs'
 
 defineOptions({
   name: 'Home',
@@ -22,9 +22,9 @@ onMounted(() => {
 
 <template>
   <div class="flex justify-between gap-5 w-full flex-1 p-4">
-    <SavedDutiesContainer class="flex-1/4" />
-    <TimeSchedule class="flex-1/2" />
-    <ActivitesPanel class="flex-1/4" />
+    <SavedDutiesContainer class="flex-1/4 overflow-hidden" />
+    <TimeSchedule class="flex-1/2 overflow-hidden" />
+    <ActivitesPanel class="flex-1/4 overflow-hidden" />
   </div>
 </template>
 

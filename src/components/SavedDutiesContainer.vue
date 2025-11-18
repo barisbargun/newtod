@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { Pencil } from 'lucide-vue-next'
 import { storeToRefs } from 'pinia'
-import { useDutiesStore } from '~/stores/duties'
+import { useTabsStore } from '~/features/tab/tab-store'
 
 const tabsStore = useTabsStore()
 const dutiesStore = useDutiesStore()
@@ -17,18 +16,23 @@ const isLoading = computed(() => tabsLoading.value || dutiesLoading.value)
       <CardTitle>
         Saved Duties
       </CardTitle>
-      <Button size="icon" variant="ghost">
-        <Pencil class="size-5 text-primary" />
-      </Button>
+      <DialogSwapTab />
     </CardHeader>
     <template v-if="!isLoading">
       <CardContent class="flex justify-between relative">
         <Tabs default-value="work" class="w-full">
-          <TabsList>
-            <TabsTrigger v-for="tab in tabs" :key="tab.id" class="capitalize" :value="tab.name">
-              {{ tab.name }}
-            </TabsTrigger>
-          </TabsList>
+          <div class="flex justify-between items-center gap-2">
+            <div class="w-full overflow-x-scroll pb-2">
+              <TabsList class="justify-start">
+                <TabContextMenu v-for="tab in tabs" :key="tab.id" :tab="tab">
+                  <TabsTrigger :value="tab.name">
+                    {{ tab.name }}
+                  </TabsTrigger>
+                </TabContextMenu>
+              </TabsList>
+            </div>
+            <DialogNewTab />
+          </div>
           <TabsContent value="work">
             <CardEvent
               v-for="duty in duties"
@@ -38,14 +42,7 @@ const isLoading = computed(() => tabsLoading.value || dutiesLoading.value)
               color="#9784eb"
             />
           </TabsContent>
-          <TabsContent value="fun">
-            Change your password here.
-          </TabsContent>
         </Tabs>
-        <!-- <Button class="absolute top-0 right-6" size="icon" variant="ghost">
-          <Plus class="size-5 text-primary" />
-        </Button> -->
-        <DialogNewTab class="absolute top-0 right-6" />
       </CardContent>
       <CardFooter>
         <DialogNewDuty />

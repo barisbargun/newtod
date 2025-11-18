@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import type { Tab } from '../tab-schema'
 import { toTypedSchema } from '@vee-validate/zod'
-import { useForm, Field as VeeField } from 'vee-validate'
 
+import { useForm, Field as VeeField } from 'vee-validate'
 import { toast } from 'vue-sonner'
 import {
   Field,
@@ -10,26 +11,30 @@ import {
   FieldLabel,
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
-import { tabCreateSchema } from '../tab-schema'
+import { tabUpdateSchema } from '../tab-schema'
 import { useTabsStore } from '../tab-store'
+
+const { tab } = defineProps<{
+  tab: Tab
+}>()
 
 const emit = defineEmits(['formSubmitted'])
 
-const { addTab } = useTabsStore()
+const { editTab } = useTabsStore()
 const isPending = ref(false)
 
 const { handleSubmit, resetForm } = useForm({
-  validationSchema: toTypedSchema(tabCreateSchema),
+  validationSchema: toTypedSchema(tabUpdateSchema),
   initialValues: {
-    name: '',
+    name: tab.name,
   },
 })
 
 const onSubmit = handleSubmit(async (data) => {
   isPending.value = true
-  const result = await addTab(data)
+  const result = await editTab(tab.id, data)
   if (!result.error) {
-    toast.success(`Tab "${result.data[0].name}" added successfully!`)
+    toast.success(`Tab "${result.data[0].name}" edited successfully!`)
     resetForm()
     emit('formSubmitted')
   }
@@ -59,9 +64,16 @@ const onSubmit = handleSubmit(async (data) => {
         </Field>
       </VeeField>
     </FieldGroup>
-    <Button class="mt-4" type="submit" :disabled="isPending">
+  </form>
+  <DialogFooter>
+    <DialogClose as-child>
+      <Button variant="outline" :disabled="isPending">
+        Cancel
+      </Button>
+    </DialogClose>
+    <Button form="form-tab" type="submit" :disabled="isPending">
       <Spinner v-if="isPending" />
       Submit
     </Button>
-  </form>
+  </DialogFooter>
 </template>
