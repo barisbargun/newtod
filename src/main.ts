@@ -24,7 +24,6 @@ export const createApp = ViteSSG(
 
     const extendedCtx = { ...ctx, pinia }
 
-    // install all modules under `modules/`
     Object.values(
       import.meta.glob<{ install: UserModule }>('./modules/*.ts', { eager: true }),
     ).forEach(i => i.install?.(extendedCtx))
@@ -33,44 +32,30 @@ export const createApp = ViteSSG(
       pinia.state.value = ctx.initialState.pinia || {}
     else
       ctx.initialState.pinia = pinia.state.value
-    // ---------------------------------
 
-    // --- Initialize Auth State ---
-    const userStore = useUserStore(pinia) // <-- 5. Pass pinia instance directly
-
-    // 1. Get the initial session from Supabase
+    const userStore = useUserStore()
     const { data } = await supabase.auth.getSession()
 
     const isLoggedIn = !!data.session
 
-    // userStore.setUser(session?.user?.user_metadata ?? null)
-
-    // 2. Listen for future auth changes (login/logout)
     supabase.auth.onAuthStateChange((event, session) => {
-      userStore.setUser(session?.user ?? null)
+      userStore.setUser(session?.user?.user_metadata as any ?? null)
     })
 
-    // --- Add Router Navigation Guard ---
-    // This guard now runs *after* the initial user state is set
     ctx.router.beforeEach((to, from, next) => {
-      // Re-fetch store inside guard just to be safe
-      // const store = useUserStore(pinia) // <-- 6. Pass pinia instance directly
       const requiresAuth = to.meta.requiresAuth
       const requiresGuest = to.meta.requiresGuest
 
       if (requiresAuth && !isLoggedIn) {
-        // Redirect to login if not authenticated
         next({
-          path: '/auth/login', // Or use route name: { name: 'login' }
+          path: '/auth/login',
           query: { redirect: to.fullPath },
         })
       }
       else if (requiresGuest && isLoggedIn) {
-        // Redirect from login page if already logged in
-        next({ path: '/home' }) // Or use route name: { name: 'home' }
+        next({ path: '/home' })
       }
       else {
-        // Allow navigation
         next()
       }
     })
