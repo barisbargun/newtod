@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { useDutiesStore } from '~/features/duty/duty-store'
 import { useTabsStore } from '~/features/tab/tab-store'
-import { useDutiesStore } from '~/stores/duties'
 
 defineOptions({
   name: 'Home',

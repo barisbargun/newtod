@@ -6,11 +6,8 @@ button:
   home: Home
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
-intro:
-  aka: Also known as
-  desc: Opinionated Vite Starter Template
-  dynamic-route: Demo of dynamic route
-  hi: Hi, {name}!
-  whats-your-name: What's your name?
 made_by: Made by barisolgun
 not-found: Not found
+time_schedule: Today's Time Schedule
+saved_duties: Saved Duties
+week_activites: This Week's Activities

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Duty } from '~/types/types'
-import { dutyIcons } from '~/config/duty-icons'
+import type { Duty } from '~/features/duty/duty-schema'
+import { dutyIcons } from '~/config/duty'
 
 const { duty } = defineProps<{
   duty: Duty
