@@ -1,5 +1,6 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import { supabase } from '~/lib/supabaseClient'
 
 interface User {
   avatar_url: string
@@ -15,28 +16,28 @@ interface User {
 }
 
 export const useUserStore = defineStore('user', () => {
-  /**
-   * The current authenticated Supabase user.
-   * Will be null if not logged in.
-   */
   const user = ref<User | null>(null)
-  /**
-   * A computed getter to easily check if the user is authenticated.
-   */
+
   const isLoggedIn = computed(() => user.value !== null)
 
-  /**
-   * Sets the current user.
-   * @param newUser The user object from Supabase, or null.
-   */
   function setUser(newUser: User | null) {
     user.value = newUser
+  }
+
+  async function logout() {
+    const { error } = await supabase.auth.signOut()
+
+    if (error)
+      throw error
+
+    setUser(null)
   }
 
   return {
     user,
     isLoggedIn,
     setUser,
+    logout,
   }
 })
 

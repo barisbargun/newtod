@@ -1,21 +1,25 @@
 <script setup lang="ts">
 import type { Tab } from '../tab-schema'
 import { Pencil } from 'lucide-vue-next'
-import { storeToRefs } from 'pinia'
 import { toast } from 'vue-sonner'
 import draggable from 'vuedraggable'
 import { useTabsStore } from '../tab-store'
 
-const tabsStore = useTabsStore()
-const { tabs: refTabs } = storeToRefs(tabsStore)
+const props = defineProps<{
+  tabs: Tab[]
+}>()
 const tabs = ref<Tab[]>([])
 
-watch(refTabs, (newTabs) => {
+const { t } = useI18n()
+const { swapTabs } = useTabsStore()
+
+watch(() => props.tabs, (newTabs) => {
   if (Array.isArray(newTabs)) {
     tabs.value = newTabs
   }
 }, {
   deep: true,
+  immediate: true,
 })
 
 const isDialogOpen = ref(false)
@@ -23,13 +27,13 @@ const isPending = ref(false)
 
 async function handleSwap() {
   isPending.value = true
-  const result = await tabsStore.swapTabs(tabs.value)
+  const result = await swapTabs(tabs.value)
   if (!result.error) {
-    toast.success('Tab swapped successfully!')
+    toast.success(t('toast.tab_swap_success'))
     isDialogOpen.value = false
   }
   else {
-    toast.error(`An error happened: "${result.error.message}"`)
+    toast.error(t('toast.an_error_happened', { msg: result.error.message }))
   }
   isPending.value = false
 }
@@ -44,9 +48,9 @@ async function handleSwap() {
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
-        <DialogTitle> Swap tabs </DialogTitle>
+        <DialogTitle>{{ t('dialog.title_swap_tabs') }}</DialogTitle>
         <DialogDescription>
-          Select the tab you want to swap with.
+          {{ t('dialog.desc_swap_tabs') }}
         </DialogDescription>
       </DialogHeader>
       <draggable v-model="tabs" tag="ol">
@@ -59,12 +63,12 @@ async function handleSwap() {
       <DialogFooter>
         <DialogClose as-child>
           <Button variant="outline" :disabled="isPending">
-            Cancel
+            {{ t('button.cancel') }}
           </Button>
         </DialogClose>
         <Button :onclick="handleSwap" variant="destructive" :disabled="isPending">
           <Spinner v-if="isPending" />
-          Swap
+          {{ t('button.swap') }}
         </Button>
       </DialogFooter>
     </DialogContent>

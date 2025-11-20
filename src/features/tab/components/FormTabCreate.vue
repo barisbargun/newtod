@@ -10,13 +10,16 @@ import {
   FieldLabel,
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
-import { tabCreateSchema } from '../tab-schema'
+import { useTabUpdateSchema } from '../tab-schema'
 import { useTabsStore } from '../tab-store'
 
 const emit = defineEmits(['formSubmitted'])
 
+const { t } = useI18n()
 const { addTab } = useTabsStore()
 const isPending = ref(false)
+
+const tabCreateSchema = useTabUpdateSchema()
 
 const { handleSubmit, resetForm } = useForm({
   validationSchema: toTypedSchema(tabCreateSchema),
@@ -29,12 +32,12 @@ const onSubmit = handleSubmit(async (data) => {
   isPending.value = true
   const result = await addTab(data)
   if (!result.error) {
-    toast.success(`Tab "${result.data[0].name}" added successfully!`)
+    toast.success(t('toast.tab_add_success'))
     resetForm()
     emit('formSubmitted')
   }
   else {
-    toast.error(`An error happened: "${result.error.message}"`)
+    toast.error(t('toast.an_error_happened', { msg: result.error.message }))
   }
   isPending.value = false
 })

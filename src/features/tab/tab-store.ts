@@ -1,17 +1,19 @@
 import type { Tab, TabCreate, TabUpdate } from './tab-schema'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ref } from 'vue'
+import { toast } from 'vue-sonner'
 import { supabase } from '~/lib/supabaseClient'
 
 export const useTabsStore = defineStore('tabs', () => {
   const tabs = ref<Tab[]>([])
   const isLoading = ref(false)
 
+  const { t } = useI18n()
+
   const fetchTabs = async () => {
     isLoading.value = true
 
     try {
-      // Supabase sorgusu
       const { data, error } = await supabase
         .from('tabs')
         .select('*')
@@ -22,8 +24,8 @@ export const useTabsStore = defineStore('tabs', () => {
 
       tabs.value = data.sort((a, b) => a.order - b.order)
     }
-    catch (err) {
-      console.error('Görevler yüklenirken bir hata oluştu:', err)
+    catch {
+      toast.error(t('console.tab_load_error'))
       tabs.value = []
     }
     finally {

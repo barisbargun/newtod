@@ -1,18 +1,21 @@
 import type { DutyIconKey } from '~/config/duty'
 import z from 'zod'
-import { validationMsg } from '~/lib/utils'
+import { useValidationMessages } from '~/lib/utils'
 
-export const dutyCreateSchema = z.object({
-  name: z.string()
-    .min(3, validationMsg('min', 3))
-    .max(150, validationMsg('max', 150)),
-  color: z.string().regex(/^#([0-9A-F]{3}|[0-9A-F]{6})$/i, 'Must be a valid 3-digit or 6-digit hex color'),
-  icon: z.string()
-    .min(3, validationMsg('min', 3))
-    .max(150, validationMsg('max', 150)),
-})
+export function useDutyCreateSchema() {
+  const validationMsg = useValidationMessages()
+  return z.object({
+    name: z.string()
+      .min(3, validationMsg('min', 3))
+      .max(150, validationMsg('max', 150)),
+    color: z.string().regex(/^#([0-9A-F]{3}|[0-9A-F]{6})$/i, 'Must be a valid 3-digit or 6-digit hex color'),
+    icon: z.string()
+      .min(3, validationMsg('min', 3))
+      .max(150, validationMsg('max', 150)),
+  })
+}
 
-export const dutyUpdateSchema = dutyCreateSchema
+export const useDutyUpdateSchema = useDutyCreateSchema
 
 /*
 
@@ -31,5 +34,5 @@ export interface Duty {
   created_at: Date
 }
 
-export type DutyCreate = z.infer<typeof dutyCreateSchema>
-export type DutyUpdate = z.infer<typeof dutyUpdateSchema>
+export type DutyCreate = z.infer<ReturnType<typeof useDutyCreateSchema>>
+export type DutyUpdate = z.infer<ReturnType<typeof useDutyUpdateSchema>>

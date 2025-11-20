@@ -1,13 +1,16 @@
 import z from 'zod'
-import { validationMsg } from '~/lib/utils'
+import { useValidationMessages } from '~/lib/utils'
 
-export const tabCreateSchema = z.object({
-  name: z.string()
-    .min(3, validationMsg('min', 3))
-    .max(150, validationMsg('max', 150)),
-})
+export function useTabCreateSchema() {
+  const validationMsg = useValidationMessages()
+  return z.object({
+    name: z.string()
+      .min(3, { message: validationMsg('min', 3) })
+      .max(150, { message: validationMsg('max', 150) }),
+  })
+}
 
-export const tabUpdateSchema = tabCreateSchema
+export const useTabUpdateSchema = useTabCreateSchema
 
 /*
 
@@ -22,5 +25,5 @@ export interface Tab {
   created_at: Date
 }
 
-export type TabCreate = z.infer<typeof tabCreateSchema>
-export type TabUpdate = z.infer<typeof tabUpdateSchema>
+export type TabCreate = z.infer<ReturnType<typeof useTabCreateSchema>>
+export type TabUpdate = z.infer<ReturnType<typeof useTabUpdateSchema>>

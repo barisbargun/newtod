@@ -7,6 +7,8 @@ import { useDutiesStore } from '../duty-store'
 const { id } = defineProps<{
   id: string
 }>()
+
+const { t } = useI18n()
 const { deleteDuty } = useDutiesStore()
 const isDialogOpen = ref(false)
 const isPending = ref(false)
@@ -15,11 +17,11 @@ async function handleDelete() {
   isPending.value = true
   try {
     await deleteDuty(id)
-    toast.success('Duty deleted successfully!')
+    toast.success(t('toast.duty_delete_success'))
     isDialogOpen.value = false
   }
   catch (error) {
-    toast.error(`An error happened: "${(error as PostgrestError).message}"`)
+    toast.error(t('toast.an_error_happened', { msg: (error as PostgrestError).message }))
   }
 
   isPending.value = false
@@ -30,25 +32,25 @@ async function handleDelete() {
   <Dialog :open="isDialogOpen" @update:open="isDialogOpen = $event">
     <DialogTrigger as-child>
       <Button variant="ghost">
-        <Trash2 /> Delete
+        <Trash2 /> {{ t('button.delete') }}
       </Button>
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Are you sure?</DialogTitle>
+        <DialogTitle>{{ t('dialog.title_sure') }}</DialogTitle>
         <DialogDescription>
-          This action cannot be undone. This will permanently delete the duty.
+          {{ t('dialog.desc_delete_duty') }}
         </DialogDescription>
       </DialogHeader>
       <DialogFooter>
         <DialogClose as-child>
           <Button variant="outline" :disabled="isPending">
-            Cancel
+            {{ t('button.cancel') }}
           </Button>
         </DialogClose>
         <Button :onclick="handleDelete" variant="destructive" :disabled="isPending">
           <Spinner v-if="isPending" />
-          Delete
+          {{ t('button.delete') }}
         </Button>
       </DialogFooter>
     </DialogContent>

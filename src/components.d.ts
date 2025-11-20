@@ -8,7 +8,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    ActivitesPanel: typeof import('./components/ActivitesPanel.vue')['default']
     AlertDialog: typeof import('./components/ui/alert-dialog/AlertDialog.vue')['default']
     AlertDialogAction: typeof import('./components/ui/alert-dialog/AlertDialogAction.vue')['default']
     AlertDialogCancel: typeof import('./components/ui/alert-dialog/AlertDialogCancel.vue')['default']
@@ -61,6 +60,7 @@ declare module 'vue' {
     DialogEditTab: typeof import('./features/tab/components/DialogEditTab.vue')['default']
     DialogFooter: typeof import('./components/ui/dialog/DialogFooter.vue')['default']
     DialogHeader: typeof import('./components/ui/dialog/DialogHeader.vue')['default']
+    DialogLogout: typeof import('./features/user/components/DialogLogout.vue')['default']
     DialogNewDuty: typeof import('./features/duty/components/DialogNewDuty.vue')['default']
     DialogNewTab: typeof import('./features/tab/components/DialogNewTab.vue')['default']
     DialogOverlay: typeof import('./components/ui/dialog/DialogOverlay.vue')['default']
@@ -109,6 +109,9 @@ declare module 'vue' {
     Label: typeof import('./components/ui/label/Label.vue')['default']
     NavbarHome: typeof import('./components/NavbarHome.vue')['default']
     NavbarIndex: typeof import('./components/NavbarIndex.vue')['default']
+    PanelActivites: typeof import('./components/PanelActivites.vue')['default']
+    PanelSavedDuties: typeof import('./components/PanelSavedDuties.vue')['default']
+    PanelSchedule: typeof import('./components/PanelSchedule.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SavedDutiesContainer: typeof import('./components/SavedDutiesContainer.vue')['default']
@@ -121,6 +124,6 @@ declare module 'vue' {
     TabsList: typeof import('./components/ui/tabs/TabsList.vue')['default']
     TabsTrigger: typeof import('./components/ui/tabs/TabsTrigger.vue')['default']
     TabSwapForm: typeof import('./features/tab/components/TabSwapForm.vue')['default']
-    TimeSchedule: typeof import('./components/TimeSchedule.vue')['default']
+    TimeBox: typeof import('./components/TimeBox.vue')['default']
   }
 }

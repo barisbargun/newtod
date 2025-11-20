@@ -54,15 +54,18 @@ provide('active_tab_id', active_tab_id)
 
 <template>
   <Card>
-    <CardHeader class="flex-center! justify-between! -mt-1.5">
+    <CardHeader class="flex-center! justify-between!">
       <CardTitle>
         {{ t("saved_duties") }}
       </CardTitle>
-      <DialogSwapTab class="absolute" />
     </CardHeader>
     <template v-if="!isLoading">
-      <CardContent class="flex justify-between relative">
-        <Tabs default-value="work" class="w-full">
+      <CardContent class="relative">
+        <div class="flex justify-end items-center gap-2">
+          <DialogSwapTab v-if="tabs.length > 1" :tabs="tabs" />
+          <DialogNewTab />
+        </div>
+        <Tabs :default-value="tabs.length ? tabs[0].name : ''" class="w-full">
           <div class="flex justify-between items-center gap-2">
             <div class="w-full overflow-x-scroll pb-2">
               <TabsList class="justify-start">
@@ -73,7 +76,6 @@ provide('active_tab_id', active_tab_id)
                 </TabContextMenu>
               </TabsList>
             </div>
-            <DialogNewTab />
           </div>
           <TabsContent v-for="tab in tabs" :key="tab.id" :tab="tab" :value="tab.name">
             <DutyContextMenu v-for="duty in duties.filter(d => tab.id === d.tab_id)" :key="duty.id" :duty="duty">

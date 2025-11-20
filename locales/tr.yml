@@ -1,19 +1,64 @@
 button:
-  about: Hakkımda
   back: Geri
+  cancel: İptal
   dashboard: Kontrol Paneli
-  go: İLERİ
+  delete: Sil
+  edit: Düzenle
   home: Anasayfa
+  logout: Çıkış yap
+  new_duty: Yeni bir görev ekle
+  submit: Gönder
+  swap: Değiştir
   toggle_dark: Karanlık modu değiştir
   toggle_langs: Dilleri değiştir
-intro:
-  aka: Ayrıca şöyle bilinir
-  desc: Görüşlü Vite Başlangıç Şablonu
-  dynamic-route: Dinamik rota demosu
-  hi: Merhaba, {name}!
-  whats-your-name: Adınız nedir?
+  upd_duty: Görevi güncelle
+  upd_duty_desc: Görev bilgilerini güncelle.
+console:
+  dropped_data_error: Bırakılan veriler görev olarak ayrıştırılamadı
+  duty_load_error: Görevler yüklenirken bir hata oluştu
+  tab_load_error: Sekmeler yüklenirken bir hata oluştu
+dialog:
+  desc_delete_duty: |-
+    Bu eylem geri alınamaz.
+    Bu, görevi kalıcı olarak silecektir.
+  desc_delete_tab: |-
+    Bu eylem geri alınamaz.
+    Bu, sekmeyi kalıcı olarak silecektir.
+  desc_logout: |-
+    Çıkış yapmak istiyor musunuz?
+    Bu eylem geri alınamaz.
+  desc_swap_tabs: Değiştirmek istediğiniz sekmeleri sürükleyin.
+  title_sure: Emin misin?
+  title_swap_tabs: Sekmeleri değiştir
+info:
+  activities_reset: Etkinlikler her Pazartesi sıfırlanacaktır.
+  no_activities_yet: Görev programını ekleyin ve etkinliklerin burada görünmesini bekleyin.
+label:
+  color: Renk
+  duty_input_placeholder: Görev adını girin
+  duty_name: Görev adı
+  icon: Simge
+  tab_input_placeholder: Sekme adını girin
+  tab_name: Sekme adı
 made_by: barisolgun tarafından yapılmıştır
 not-found: Bulunamadı
 saved_duties: Kaydedilen Görevler
 time_schedule: Bugünün Zaman Çizelgesi
+toast:
+  an_error_happened: 'Bir hata oluştu: {msg}'
+  cannot_assign_duties: 2'den fazla görev atanamaz
+  duty_add_success: Görev başarıyla eklendi!
+  duty_already_scheduled: Görev zaten planlandı
+  duty_delete_success: Görev başarıyla silindi!
+  duty_edit_success: Görev başarıyla düzenlendi!
+  edited_success: başarıyla düzenlendi
+  tab_add_success: Sekme başarıyla eklendi!
+  tab_delete_success: Sekme başarıyla silindi!
+  tab_edit_success: Sekme başarıyla düzenlendi!
+  tab_swap_success: Sekme başarıyla değiştirildi!
+validation:
+  max_chars: En fazla {characters} karakter olmalıdır.
+  max_number: En fazla {characters} olmalıdır.
+  min_chars: En az {characters} karakter olmalıdır.
+  min_number: En az {characters} olmalıdır.
 week_activites: Bu Haftanın Aktiviteleri

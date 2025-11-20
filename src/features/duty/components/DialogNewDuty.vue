@@ -5,6 +5,8 @@ defineOptions({
   inheritAttrs: false,
 })
 
+const { t } = useI18n()
+
 const attrs = useAttrs()
 
 const isDialogOpen = ref(false)
@@ -19,12 +21,12 @@ function closeDialog() {
     <DialogTrigger as-child>
       <Button v-bind="attrs">
         <Plus class="size-5" />
-        Add a new duty
+        {{ t('button.new_duty') }}
       </Button>
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Add a new duty</DialogTitle>
+        <DialogTitle>{{ t('button.new_duty') }}</DialogTitle>
       </DialogHeader>
       <FormDutyCreate @form-submitted="closeDialog" />
     </DialogContent>

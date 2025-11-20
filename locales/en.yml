@@ -1,13 +1,58 @@
 button:
-  about: About
   back: Back
+  cancel: Cancel
   dashboard: Dashboard
-  go: GO
+  delete: Delete
+  edit: Edit
   home: Home
+  logout: Logout
+  new_duty: Add a new duty
+  submit: Submit
+  swap: Swap
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
+  upd_duty: Update duty
+  upd_duty_desc: Update the duty's information.
+console:
+  dropped_data_error: Dropped data could not be parsed as Duty
+  duty_load_error: An error happened when loading duties
+  tab_load_error: An error happened when loading tabs
+dialog:
+  desc_delete_duty: This action cannot be undone. This will permanently delete the duty.
+  desc_delete_tab: This action cannot be undone. This will permanently delete the tab.
+  desc_logout: Do you really want to logout? This action cannot be undone.
+  desc_swap_tabs: Select the tab you want to swap with.
+  title_sure: Are you sure?
+  title_swap_tabs: Swap tabs
+info:
+  activities_reset: Activities will be reset every Monday.
+  no_activities_yet: Add duties schedule and wait for activities to appear here.
+label:
+  color: Color
+  duty_input_placeholder: Enter duty name
+  duty_name: Duty name
+  icon: Icon
+  tab_input_placeholder: Enter tab name
+  tab_name: Tab name
 made_by: Made by barisolgun
 not-found: Not found
-time_schedule: Today's Time Schedule
 saved_duties: Saved Duties
+time_schedule: Today's Time Schedule
+toast:
+  an_error_happened: 'An error happened: {msg}'
+  cannot_assign_duties: Cannot assign more than 2 duties
+  duty_add_success: Duty added successfully!
+  duty_already_scheduled: Duty is already scheduled
+  duty_delete_success: Duty deleted successfully!
+  duty_edit_success: Duty edited successfully!
+  edited_success: edited successfully
+  tab_add_success: Tab added successfully!
+  tab_delete_success: Tab deleted successfully!
+  tab_edit_success: Tab edited successfully!
+  tab_swap_success: Tab swapped successfully!
+validation:
+  max_chars: Must be at most {characters} characters.
+  max_number: Must be at most {characters}.
+  min_chars: Must be at least {characters} characters.
+  min_number: Must be at least {characters}.
 week_activites: This Week's Activities
