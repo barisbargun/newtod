@@ -1,11 +1,14 @@
 import type { Duty, DutyCreate, DutyUpdate } from './duty-schema'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ref } from 'vue'
+import { toast } from 'vue-sonner'
 import { supabase } from '~/lib/supabaseClient'
 
 export const useDutiesStore = defineStore('duties', () => {
   const duties = ref<Duty[]>([])
   const isLoading = ref(false)
+
+  const { t } = useI18n()
 
   const fetchDuties = async () => {
     isLoading.value = true
@@ -22,8 +25,8 @@ export const useDutiesStore = defineStore('duties', () => {
 
       duties.value = data
     }
-    catch (err) {
-      console.error('Görevler yüklenirken bir hata oluştu:', err)
+    catch {
+      toast.error(t('console.duty_load_error'))
       duties.value = []
     }
     finally {

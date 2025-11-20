@@ -1,24 +1,21 @@
 <script setup lang="ts">
 import type { PostgrestError } from '@supabase/supabase-js'
-import { Trash2 } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
-import { useTabsStore } from '../tab-store'
+import { useUserStore } from '../user-store'
 
-const { id } = defineProps<{
-  id: string
-}>()
-
-const { t } = useI18n()
-const { deleteTab } = useTabsStore()
+const router = useRouter()
+const { logout } = useUserStore()
 const isDialogOpen = ref(false)
 const isPending = ref(false)
+const { t } = useI18n()
 
-async function handleDelete() {
+async function handleLogout() {
   isPending.value = true
   try {
-    await deleteTab(id)
-    toast.success(t('toast.tab_delete_success'))
+    await logout()
     isDialogOpen.value = false
+
+    router.push('/auth/login')
   }
   catch (error) {
     toast.error(t('toast.an_error_happened', { msg: (error as PostgrestError).message }))
@@ -31,15 +28,15 @@ async function handleDelete() {
 <template>
   <Dialog :open="isDialogOpen" @update:open="isDialogOpen = $event">
     <DialogTrigger as-child>
-      <Button variant="ghost">
-        <Trash2 /> {{ t('button.delete') }}
+      <Button variant="ghost" class="w-full block pl-2 text-left">
+        {{ t('button.logout') }}
       </Button>
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
         <DialogTitle>{{ t('dialog.title_sure') }}</DialogTitle>
         <DialogDescription>
-          {{ t('dialog.desc_delete_tab') }}
+          {{ t('dialog.desc_logout') }}
         </DialogDescription>
       </DialogHeader>
       <DialogFooter>
@@ -48,9 +45,9 @@ async function handleDelete() {
             {{ t('button.cancel') }}
           </Button>
         </DialogClose>
-        <Button :onclick="handleDelete" variant="destructive" :disabled="isPending">
+        <Button :onclick="handleLogout" variant="destructive" :disabled="isPending">
           <Spinner v-if="isPending" />
-          {{ t('button.delete') }}
+          {{ t('button.logout') }}
         </Button>
       </DialogFooter>
     </DialogContent>

@@ -6,6 +6,8 @@ const { duty } = defineProps<{
   duty: Duty
 }>()
 
+const { t } = useI18n()
+
 const isDialogOpen = ref(false)
 
 function closeDialog() {
@@ -17,14 +19,14 @@ function closeDialog() {
   <Dialog :open="isDialogOpen" @update:open="isDialogOpen = $event">
     <DialogTrigger as-child>
       <Button variant="ghost">
-        <Pencil /> Edit
+        <Pencil /> {{ t('button.edit') }}
       </Button>
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Update duty</DialogTitle>
+        <DialogTitle>{{ t('button.upd_duty') }}</DialogTitle>
         <DialogDescription>
-          Update the duty's information.
+          {{ t('button.upd_duty_desc') }}
         </DialogDescription>
       </DialogHeader>
       <FormDutyEdit :duty="duty" @form-submitted="closeDialog" />

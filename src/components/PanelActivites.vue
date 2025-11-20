@@ -33,7 +33,7 @@ function getPercentage(partial: number, total: number) {
         {{ t("week_activites") }}
       </CardTitle>
     </CardHeader>
-    <template v-if="!dutiesLoading">
+    <template v-if="!dutiesLoading && duties?.length">
       <CardContent class="flex justify-between relative mt-[20%]">
         <DonutChart
           index="name"
@@ -55,6 +55,12 @@ function getPercentage(partial: number, total: number) {
         </ul>
       </CardFooter>
     </template>
+    <p v-else-if="!duties?.length" class="px-6">
+      {{ t("info.no_activities_yet") }}
+
+      <strong class="block mt-4 font-normal">{{ t("info.activities_reset") }}</strong>
+    </p>
+
     <Spinner v-else class="m-auto size-20" />
   </Card>
 </template>

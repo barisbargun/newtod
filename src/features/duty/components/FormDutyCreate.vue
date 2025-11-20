@@ -11,15 +11,18 @@ import {
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { dutyColors, dutyIcons } from '~/config/duty'
-import { dutyCreateSchema } from '../duty-schema'
+import { useDutyCreateSchema } from '../duty-schema'
 import { useDutiesStore } from '../duty-store'
 
 const emit = defineEmits(['formSubmitted'])
 
+const { t } = useI18n()
 const { addDuty } = useDutiesStore()
 const isPending = ref(false)
 
 const activeTabId = inject('active_tab_id') as Ref<string | null>
+
+const dutyCreateSchema = useDutyCreateSchema()
 
 const { handleSubmit, resetForm } = useForm({
   validationSchema: toTypedSchema(dutyCreateSchema),
@@ -35,12 +38,12 @@ const onSubmit = handleSubmit(async (data) => {
   if (activeTabId.value) {
     const result = await addDuty(data, activeTabId.value)
     if (!result.error) {
-      toast.success(`Duty "${result.data[0].name}" added successfully!`)
+      toast.success(t('toast.duty_add_success'))
       resetForm()
       emit('formSubmitted')
     }
     else {
-      toast.error(`An error happened: "${result.error.message}"`)
+      toast.error(t('toast.an_error_happened', { msg: result.error.message }))
     }
   }
 
@@ -54,12 +57,12 @@ const onSubmit = handleSubmit(async (data) => {
       <VeeField v-slot="{ field, errors }" name="name">
         <Field :data-invalid="!!errors.length">
           <FieldLabel for="form-duty-name">
-            Duty name
+            {{ t('label.duty_name') }}
           </FieldLabel>
           <Input
             id="form-duty-name"
             v-bind="field"
-            placeholder="Enter duty name"
+            :placeholder="t('label.duty_input_placeholder')"
             autocomplete="off"
             :aria-invalid="!!errors.length"
           />
@@ -69,7 +72,7 @@ const onSubmit = handleSubmit(async (data) => {
       <VeeField v-slot="{ field, errors }" name="color">
         <Field :data-invalid="!!errors.length">
           <FieldLabel for="form-duty-color">
-            Color
+            {{ t('label.color') }}
           </FieldLabel>
           <ul class="flex gap-3 flex-row">
             <li
@@ -87,7 +90,7 @@ const onSubmit = handleSubmit(async (data) => {
       <VeeField v-slot="{ field, errors }" name="icon">
         <Field :data-invalid="!!errors.length">
           <FieldLabel for="form-duty-icon">
-            Icon
+            {{ t('label.icon') }}
           </FieldLabel>
           <ul class="flex flex-wrap gap-2 p-2 border rounded-lg bg-card max-h-40 overflow-y-auto">
             <li
@@ -103,15 +106,12 @@ const onSubmit = handleSubmit(async (data) => {
               <component :is="IconComponent" class="size-6" />
             </li>
           </ul>
-          <!-- Hidden input field for the actual value (optional, but good for accessibility/form submission) -->
-          <!-- Since the selection is visual, we can use a hidden input just to store the validated value -->
           <input
             id="form-duty-icon"
             type="hidden"
             v-bind="field"
             autocomplete="off"
           >
-          <!-- Removed visible Input as requested -->
           <FieldError v-if="errors.length" :errors="errors" />
         </Field>
       </VeeField>
@@ -120,12 +120,12 @@ const onSubmit = handleSubmit(async (data) => {
   <DialogFooter>
     <DialogClose as-child>
       <Button variant="outline" :disabled="isPending">
-        Cancel
+        {{ t('button.cancel') }}
       </Button>
     </DialogClose>
     <Button form="form-duty" type="submit" :disabled="isPending">
       <Spinner v-if="isPending" />
-      Submit
+      {{ t('button.submit') }}
     </Button>
   </DialogFooter>
 </template>

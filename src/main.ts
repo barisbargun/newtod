@@ -6,8 +6,8 @@ import { ViteSSG } from 'vite-ssg'
 
 import { routes } from 'vue-router/auto-routes'
 
+import { useUserStore } from '~/features/user/user-store'
 import { supabase } from '~/lib/supabaseClient'
-import { useUserStore } from '~/stores/user'
 import App from './App.vue'
 
 import './main.css'
@@ -34,15 +34,16 @@ export const createApp = ViteSSG(
       ctx.initialState.pinia = pinia.state.value
 
     const userStore = useUserStore()
-    const { data } = await supabase.auth.getSession()
-
-    const isLoggedIn = !!data.session
 
     supabase.auth.onAuthStateChange((event, session) => {
       userStore.setUser(session?.user?.user_metadata as any ?? null)
     })
 
-    ctx.router.beforeEach((to, from, next) => {
+    ctx.router.beforeEach(async (to, from, next) => {
+      const { data } = await supabase.auth.getSession()
+
+      const isLoggedIn = !!data.session
+
       const requiresAuth = to.meta.requiresAuth
       const requiresGuest = to.meta.requiresGuest
 

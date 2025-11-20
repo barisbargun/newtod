@@ -1,4 +1,3 @@
-import type { Duty } from '~/features/duty/duty-schema'
 import {
   BookOpen,
   Briefcase,
@@ -67,9 +66,4 @@ export const dutyColors = [
   '#60A5FA',
   '#A78BFA',
   '#F472B6',
-]
-
-export const duties: Duty[] = [
-  { name: 'Workout', times: 4, color: '#9784eb', icon: 'footprints' },
-  { name: 'Read a book', times: 5, color: '#6bb56b', icon: 'bookOpen' },
 ]
