@@ -50,6 +50,43 @@ label:
 made_by: '{name} tarafından yapılmıştır ❤️'
 not-found: Bulunamadı
 page_not_exist: Böyle bir sayfa mevcut değil.
+privacy:
+  app_data_title: Uygulama Verileri
+  collected_data: Topladığımız Bilgiler
+  collected_data_desc: Uygulamamız, hizmet sağlamak amacıyla sadece iki tür bilgi toplar
+  contact_qst_desc: Gizlilik politikamız hakkında herhangi bir sorunuz varsa, lütfen
+  contact_title: İletişim
+  contact_us: bizimle iletişime geçin.
+  duties_bold: Görevler (To Do) ve Ajanda Kayıtları
+  duties_desc: >-
+    Oluşturduğunuz, düzenlediğiniz, kaydettiğiniz ve sildiğiniz tüm görevler ve
+    program verileri. Bu veriler yalnızca uygulamanın temel işlevini yerine
+    getirmek için kullanılır.
+  email_bold: E-posta Adresi
+  email_desc: Kullanıcı hesabınızı tanımlamak ve size hizmet sunmak için kullanılır.
+  google_auth: Kimlik Doğrulama Bilgileri (Google ile Giriş)
+  img_bold: Profil Resmi (URL)
+  img_desc: Uygulama içinde profilinizin görsel olarak temsil edilmesi için kullanılır.
+  last_upd_date: 'Son Güncelleme Tarihi: 21 Kasım 2025'
+  stg_usg_desc1: >-
+    Tüm Kimlik Doğrulama ve Uygulama Verileriniz, güvenli ve ölçeklenebilir bir
+    platform olan {provider} tarafından barındırılan bir veritabanında saklanır.
+  stg_usg_desc2: >-
+    Toplanan veriler, yalnızca Uygulama'nın size kişiselleştirilmiş bir görev ve
+    ajanda hizmeti sunması için kullanılır. Verileriniz asla reklam, pazarlama
+    veya üçüncü taraf hizmetlerle paylaşım amacıyla kullanılmaz.
+  storage_and_usage_title: Verilerin Depolanması ve Kullanımı
+  thrd_prty_services_desc: Uygulama, temel işlevler için aşağıdaki üçüncü taraf hizmetlerini kullanır
+  thrd_prty_services_googl: >-
+    Yalnızca kimlik doğrulama (Google ile Giriş) hizmetini sağlamak için
+    kullanılır.
+  thrd_prty_services_supb: >-
+    Veritabanı hizmetleri, kimlik doğrulama yönetimi ve API sağlamak için
+    kullanılır.
+  thrd_prty_services_title: Üçüncü Taraf Hizmetleri
+  title: Gizlilik Politikası
+  username_bold: Kullanıcı Adı/Görünen Ad
+  username_desc: Uygulama içinde sizi tanımak için kullanılır.
 saved_duties: Kaydedilen Görevler
 schedule: Takvim
 time_schedule: Bugünün Zaman Çizelgesi

@@ -49,7 +49,6 @@ declare module 'vue' {
     ContextMenuSubContent: typeof import('./components/ui/context-menu/ContextMenuSubContent.vue')['default']
     ContextMenuSubTrigger: typeof import('./components/ui/context-menu/ContextMenuSubTrigger.vue')['default']
     ContextMenuTrigger: typeof import('./components/ui/context-menu/ContextMenuTrigger.vue')['default']
-    copy: typeof import('./features/tab/components/DialogDeleteTab copy.vue')['default']
     Dialog: typeof import('./components/ui/dialog/Dialog.vue')['default']
     DialogClose: typeof import('./components/ui/dialog/DialogClose.vue')['default']
     DialogContent: typeof import('./components/ui/dialog/DialogContent.vue')['default']
@@ -101,7 +100,6 @@ declare module 'vue' {
     FieldSet: typeof import('./components/ui/field/FieldSet.vue')['default']
     FieldTitle: typeof import('./components/ui/field/FieldTitle.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
-    FooterIndex: typeof import('./components/FooterIndex.vue')['default']
     FormDutyCreate: typeof import('./features/duty/components/FormDutyCreate.vue')['default']
     FormDutyEdit: typeof import('./features/duty/components/FormDutyEdit.vue')['default']
     FormTabCreate: typeof import('./features/tab/components/FormTabCreate.vue')['default']
@@ -115,7 +113,6 @@ declare module 'vue' {
     PanelSchedule: typeof import('./components/PanelSchedule.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SavedDutiesContainer: typeof import('./components/SavedDutiesContainer.vue')['default']
     Separator: typeof import('./components/ui/separator/Separator.vue')['default']
     Sonner: typeof import('./components/ui/sonner/Sonner.vue')['default']
     Spinner: typeof import('./components/ui/spinner/Spinner.vue')['default']
@@ -124,7 +121,6 @@ declare module 'vue' {
     TabsContent: typeof import('./components/ui/tabs/TabsContent.vue')['default']
     TabsList: typeof import('./components/ui/tabs/TabsList.vue')['default']
     TabsTrigger: typeof import('./components/ui/tabs/TabsTrigger.vue')['default']
-    TabSwapForm: typeof import('./features/tab/components/TabSwapForm.vue')['default']
     TimeBox: typeof import('./components/TimeBox.vue')['default']
   }
 }

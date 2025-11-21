@@ -20,9 +20,9 @@ async function toggleLocales() {
     <div class="container flex items-center justify-between">
       <div class="flex items-center justify-center gap-2">
         <img src="/assets/logo.avif" alt="logo" class="size-5 rounded-full">
-        <p class="font-poppins font-medium">
+        <RouterLink class="font-poppins font-medium" :to="{ name: '/' }">
           {{ site.title }}
-        </p>
+        </RouterLink>
       </div>
       <nav class="flex justify-center items-center gap-4">
         <RouterLink icon-btn :to="{ name: '/home' }" :title="t('button.dashboard')">
