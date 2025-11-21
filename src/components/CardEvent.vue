@@ -14,7 +14,7 @@ const { duty } = defineProps<{
       <component :is="dutyIcons[duty.icon]" class="size-7" />
       <div class="size-full absolute top-0 left-0 -z-10 rounded" :style="{ backgroundColor: duty.color }" />
     </div>
-    <p class="text-xs text-muted-foreground flex-1 ml-2">
+    <p class="text-sm flex-1 ml-2 pr-3 line-clamp-3" :title="duty.name">
       {{ duty.name }}
     </p>
     <p class="text-xs text-muted-foreground">

@@ -1,3 +1,4 @@
+activites: Activites
 button:
   back: Back
   cancel: Cancel
@@ -7,12 +8,16 @@ button:
   home: Home
   logout: Logout
   new_duty: Add a new duty
+  new_tab: Add a new tab
   submit: Submit
   swap: Swap
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
   upd_duty: Update duty
   upd_duty_desc: Update the duty's information.
+  upd_tab: Update tab
+  upd_tab_desc: Update the tab's information.
+coming_soon: Coming soon
 console:
   dropped_data_error: Dropped data could not be parsed as Duty
   duty_load_error: An error happened when loading duties
@@ -24,6 +29,7 @@ dialog:
   desc_swap_tabs: Select the tab you want to swap with.
   title_sure: Are you sure?
   title_swap_tabs: Swap tabs
+head_back_page: Head to back or ask for help
 info:
   activities_reset: Activities will be reset every Monday.
   no_activities_yet: Add duties schedule and wait for activities to appear here.
@@ -34,9 +40,12 @@ label:
   icon: Icon
   tab_input_placeholder: Enter tab name
   tab_name: Tab name
-made_by: Made by barisolgun
+  total_duties: '{count} duties'
+made_by: Made by {name} ❤️
 not-found: Not found
+page_not_exist: Uh oh. That page doesn't exist.
 saved_duties: Saved Duties
+schedule: Schedule
 time_schedule: Today's Time Schedule
 toast:
   an_error_happened: 'An error happened: {msg}'

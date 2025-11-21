@@ -15,7 +15,7 @@ const { scheduledDuty, index, isPending, assignedHour, handleDragOver, handleDro
 
 <template>
   <div
-    class="flex-center flex-col h-28 rounded transition-all duration-200 bg-secondary relative"
+    class="flex-center flex-col h-28 rounded transition-all duration-200 bg-secondary relative px-2"
     :style="scheduledDuty.duties.length ? { backgroundColor: scheduledDuty.duties[0].color } : {}"
     @dragover="handleDragOver($event)" @drop="handleDrop($event, index)"
   >
@@ -24,7 +24,7 @@ const { scheduledDuty, index, isPending, assignedHour, handleDragOver, handleDro
       {{ scheduledDuty.time === 24 ? '00' : scheduledDuty.time < 10 ? `0${scheduledDuty.time}` : scheduledDuty.time }}:00
     </p>
     <div v-for="duty in scheduledDuty.duties" :key="duty.id" class="bg-background/50 rounded py-0.5 px-1 relative mt-2 shadow-md">
-      <p class="font-medium text-sm text-blue-700 dark:text-blue-300">
+      <p class="font-medium text-sm text-blue-700 dark:text-blue-300 line-clamp-1" :title="duty.name">
         {{ duty.name }}
       </p>
       <CircleX

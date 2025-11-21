@@ -47,7 +47,9 @@ function getPercentage(partial: number, total: number) {
         <ul class="w-full">
           <li v-for="duty in duties" :key="duty.name" class="flex items-center gap-2 not-last:mb-2">
             <span class="size-3 rounded-full" :style="{ backgroundColor: duty.color }" />
-            <p>{{ duty.name }}</p>
+            <p class="line-clamp-2 flex-1 pl-1 pr-2" :title="duty.name">
+              {{ duty.name }}
+            </p>
             <p class="ml-auto text-sm text-muted-foreground">
               {{ getPercentage(duty.tw_times, totalDuties) }}%
             </p>

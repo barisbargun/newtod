@@ -102,7 +102,7 @@ async function removeDuty(index: number, duty: Duty): Promise<void> {
 
 <template>
   <Card>
-    <CardHeader class="flex-center! justify-between!">
+    <CardHeader class="flex-center! justify-between! ">
       <CardTitle>
         {{ t("time_schedule") }}
       </CardTitle>

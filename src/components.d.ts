@@ -100,6 +100,7 @@ declare module 'vue' {
     FieldSeparator: typeof import('./components/ui/field/FieldSeparator.vue')['default']
     FieldSet: typeof import('./components/ui/field/FieldSet.vue')['default']
     FieldTitle: typeof import('./components/ui/field/FieldTitle.vue')['default']
+    Footer: typeof import('./components/Footer.vue')['default']
     FooterIndex: typeof import('./components/FooterIndex.vue')['default']
     FormDutyCreate: typeof import('./features/duty/components/FormDutyCreate.vue')['default']
     FormDutyEdit: typeof import('./features/duty/components/FormDutyEdit.vue')['default']

@@ -44,17 +44,17 @@ const onSubmit = handleSubmit(async (data) => {
 </script>
 
 <template>
-  <form id="form-tab" @submit="onSubmit">
+  <form id="form-tab-create" @submit="onSubmit">
     <FieldGroup>
       <VeeField v-slot="{ field, errors }" name="name">
         <Field :data-invalid="!!errors.length">
           <FieldLabel for="form-tab-name">
-            Tab name
+            {{ t('label.tab_name') }}
           </FieldLabel>
           <Input
             id="form-tab-name"
             v-bind="field"
-            placeholder="Enter tab name"
+            :placeholder="t('label.tab_input_placeholder')"
             autocomplete="off"
             :aria-invalid="!!errors.length"
           />
@@ -62,9 +62,16 @@ const onSubmit = handleSubmit(async (data) => {
         </Field>
       </VeeField>
     </FieldGroup>
-    <Button class="mt-4" type="submit" :disabled="isPending">
-      <Spinner v-if="isPending" />
-      Submit
-    </Button>
   </form>
+  <DialogFooter>
+    <DialogClose as-child>
+      <Button variant="outline" :disabled="isPending">
+        {{ t('button.cancel') }}
+      </Button>
+    </DialogClose>
+    <Button form="form-tab-create" type="submit" :disabled="isPending">
+      <Spinner v-if="isPending" />
+      {{ t('button.submit') }}
+    </Button>
+  </DialogFooter>
 </template>

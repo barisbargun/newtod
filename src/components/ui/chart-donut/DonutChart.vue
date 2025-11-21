@@ -40,6 +40,7 @@ const props = withDefaults(defineProps<Pick<BaseChartProps<T>, 'data' | 'colors'
 type KeyOfT = Extract<keyof T, string>
 type Data = typeof props.data[number]
 
+const { t } = useI18n()
 const category = computed(() => props.category as KeyOfT)
 const index = computed(() => props.index as KeyOfT)
 
@@ -70,7 +71,7 @@ const legendItems = computed(() => props.data.map((item, i) => ({
         :color="colors"
         :arc-width="type === 'donut' ? 20 : 0"
         :show-background="false"
-        :central-label="type === 'donut' ? `${totalValue} duties` : ''"
+        :central-label="type === 'donut' ? t('label.total_duties', { count: totalValue }) : ''"
 
         :events="{
           [Donut.selectors.segment]: {
