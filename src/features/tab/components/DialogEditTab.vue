@@ -6,6 +6,7 @@ const { tab } = defineProps<{
   tab: Tab
 }>()
 
+const { t } = useI18n()
 const isDialogOpen = ref(false)
 
 function closeDialog() {
@@ -17,14 +18,14 @@ function closeDialog() {
   <Dialog :open="isDialogOpen" @update:open="isDialogOpen = $event">
     <DialogTrigger as-child>
       <Button variant="ghost">
-        <Pencil /> Edit
+        <Pencil /> {{ t('button.edit') }}
       </Button>
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Update tab</DialogTitle>
+        <DialogTitle>{{ t('button.upd_tab') }}</DialogTitle>
         <DialogDescription>
-          Update the tab's information.
+          {{ t('button.upd_tab_desc') }}
         </DialogDescription>
       </DialogHeader>
       <FormTabEdit :tab="tab" @form-submitted="closeDialog" />

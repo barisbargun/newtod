@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Languages, Moon, SunMedium } from 'lucide-vue-next'
 import { site } from '~/config/site'
 
 import { availableLocales, loadLanguageAsync } from '~/modules/i18n'
@@ -18,8 +19,10 @@ async function toggleLocales() {
   <header class="bg-card w-full py-2">
     <div class="container flex items-center justify-between">
       <div class="flex items-center justify-center gap-2">
-        <div class="bg-primary size-5" />
-        <p>{{ site.title }}</p>
+        <img src="/assets/logo.avif" alt="logo" class="size-5 rounded-full">
+        <p class="font-poppins font-medium">
+          {{ site.title }}
+        </p>
       </div>
       <nav class="flex justify-center items-center gap-4">
         <RouterLink icon-btn :to="{ name: '/home' }" :title="t('button.dashboard')">
@@ -28,14 +31,8 @@ async function toggleLocales() {
           </Button>
         </RouterLink>
 
-        <a icon-btn :title="t('button.toggle_langs')" @click="toggleLocales()">
-          <div i-carbon-language />
-        </a>
-
-        <button icon-btn :title="t('button.toggle_dark')" @click="toggleDark()">
-          <div i="carbon-sun dark:carbon-moon" />
-        </button>
-        <!-- Todo: Fill here -->
+        <Languages class="size-5 cursor-pointer" :title="t('button.toggle_langs')" @click="toggleLocales()" />
+        <component :is="isDark ? SunMedium : Moon" class="size-5 cursor-pointer" :title="t('button.toggle_dark')" @click="toggleDark()" />
       </nav>
     </div>
   </header>

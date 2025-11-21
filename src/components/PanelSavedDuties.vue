@@ -67,7 +67,7 @@ provide('active_tab_id', active_tab_id)
         </div>
         <Tabs :default-value="tabs.length ? tabs[0].name : ''" class="w-full">
           <div class="flex justify-between items-center gap-2">
-            <div class="w-full overflow-x-scroll pb-2">
+            <div class="w-full overflow-auto pb-2">
               <TabsList class="justify-start">
                 <TabContextMenu v-for="tab in tabs" :key="tab.id" :tab="tab">
                   <TabsTrigger :value="tab.name" @click="active_tab_id = tab.id">

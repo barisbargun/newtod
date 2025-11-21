@@ -7,6 +7,7 @@ defineOptions({
 
 const attrs = useAttrs()
 
+const { t } = useI18n()
 const isDialogOpen = ref(false)
 
 function closeDialog() {
@@ -23,7 +24,7 @@ function closeDialog() {
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Add a new tab</DialogTitle>
+        <DialogTitle>{{ t('button.new_tab') }}</DialogTitle>
       </DialogHeader>
       <FormTabCreate @form-submitted="closeDialog" />
     </DialogContent>

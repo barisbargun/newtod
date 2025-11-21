@@ -1,3 +1,4 @@
+activites: Aktiviteler
 button:
   back: Geri
   cancel: İptal
@@ -7,12 +8,16 @@ button:
   home: Anasayfa
   logout: Çıkış yap
   new_duty: Yeni bir görev ekle
+  new_tab: Yeni bir sekme ekle
   submit: Gönder
   swap: Değiştir
   toggle_dark: Karanlık modu değiştir
   toggle_langs: Dilleri değiştir
   upd_duty: Görevi güncelle
   upd_duty_desc: Görev bilgilerini güncelle.
+  upd_tab: Sekme güncelle
+  upd_tab_desc: Sekmenin bilgilerini güncelleyin.
+coming_soon: Yakında gelecek
 console:
   dropped_data_error: Bırakılan veriler görev olarak ayrıştırılamadı
   duty_load_error: Görevler yüklenirken bir hata oluştu
@@ -30,6 +35,7 @@ dialog:
   desc_swap_tabs: Değiştirmek istediğiniz sekmeleri sürükleyin.
   title_sure: Emin misin?
   title_swap_tabs: Sekmeleri değiştir
+head_back_page: Geri gidin veya yardım isteyin
 info:
   activities_reset: Etkinlikler her Pazartesi sıfırlanacaktır.
   no_activities_yet: Görev programını ekleyin ve etkinliklerin burada görünmesini bekleyin.
@@ -40,9 +46,12 @@ label:
   icon: Simge
   tab_input_placeholder: Sekme adını girin
   tab_name: Sekme adı
-made_by: barisolgun tarafından yapılmıştır
+  total_duties: '{count} görevler'
+made_by: '{name} tarafından yapılmıştır ❤️'
 not-found: Bulunamadı
+page_not_exist: Böyle bir sayfa mevcut değil.
 saved_duties: Kaydedilen Görevler
+schedule: Takvim
 time_schedule: Bugünün Zaman Çizelgesi
 toast:
   an_error_happened: 'Bir hata oluştu: {msg}'
