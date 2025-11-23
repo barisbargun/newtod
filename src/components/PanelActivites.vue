@@ -59,10 +59,8 @@ function getPercentage(partial: number, total: number) {
     </template>
     <p v-else-if="!duties?.length" class="px-6">
       {{ t("info.no_activities_yet") }}
-
       <strong class="block mt-4 font-normal">{{ t("info.activities_reset") }}</strong>
     </p>
-
     <Spinner v-else class="m-auto size-20" />
   </Card>
 </template>

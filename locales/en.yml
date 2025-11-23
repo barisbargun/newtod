@@ -6,13 +6,14 @@ button:
   delete: Delete
   edit: Edit
   home: Home
+  login_google: Continue with Google
   logout: Logout
   new_duty: Add a new duty
   new_tab: Add a new tab
   submit: Submit
   swap: Swap
-  toggle_dark: Toggle dark mode
-  toggle_langs: Change languages
+  toggle_dark: Toggle mode
+  toggle_langs: Change language
   upd_duty: Update duty
   upd_duty_desc: Update the duty's information.
   upd_tab: Update tab
@@ -47,14 +48,16 @@ page_not_exist: Uh oh. That page doesn't exist.
 privacy:
   app_data_title: Application Data
   collected_data: Information We Collect
-  collected_data_desc: Our application collects only two types of information for the purpose of providing service.
+  collected_data_desc: >-
+    Our application collects only two types of information for the purpose of
+    providing service.
   contact_qst_desc: If you have any questions regarding our privacy policy, please
   contact_title: Contact
   contact_us: contact us.
   duties_bold: Tasks (To Do) and Schedule Entries
   duties_desc: >-
-    All tasks and schedule data you create, edit, save, and delete. This data
-    is used solely to perform the application's core functionality.
+    All tasks and schedule data you create, edit, save, and delete. This data is
+    used solely to perform the application's core functionality.
   email_bold: Email Address
   email_desc: Used to identify your user account and provide service.
   google_auth: Authentication Information (Sign-in with Google)
@@ -69,11 +72,15 @@ privacy:
     task and scheduling service. Your data is never used for advertising,
     marketing, or shared with third-party services.
   storage_and_usage_title: Data Storage and Use
-  thrd_prty_services_desc: The application relies on the following third-party services for core functionality
+  thrd_prty_services_desc: >-
+    The application relies on the following third-party services for core
+    functionality
   thrd_prty_services_googl: >-
-    Used exclusively to provide the authentication service (Sign-in with Google).
+    Used exclusively to provide the authentication service (Sign-in with
+    Google).
   thrd_prty_services_supb: >-
-    Used to provide database services, authentication management, and API access.
+    Used to provide database services, authentication management, and API
+    access.
   thrd_prty_services_title: Third-Party Services
   title: Privacy Policy
   username_bold: Username/Display Name

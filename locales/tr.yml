@@ -6,13 +6,14 @@ button:
   delete: Sil
   edit: Düzenle
   home: Anasayfa
+  login_google: Google ile devam et
   logout: Çıkış yap
   new_duty: Yeni bir görev ekle
   new_tab: Yeni bir sekme ekle
   submit: Gönder
   swap: Değiştir
-  toggle_dark: Karanlık modu değiştir
-  toggle_langs: Dilleri değiştir
+  toggle_dark: Modu değiştir
+  toggle_langs: Dili değiştir
   upd_duty: Görevi güncelle
   upd_duty_desc: Görev bilgilerini güncelle.
   upd_tab: Sekme güncelle

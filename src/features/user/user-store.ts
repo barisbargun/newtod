@@ -2,7 +2,7 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { supabase } from '~/lib/supabaseClient'
 
-interface User {
+export interface User {
   avatar_url: string
   email: string
   email_verified: boolean

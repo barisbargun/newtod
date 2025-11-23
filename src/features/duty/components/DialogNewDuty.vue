@@ -4,10 +4,9 @@ import { Plus } from 'lucide-vue-next'
 defineOptions({
   inheritAttrs: false,
 })
+const attrs = useAttrs()
 
 const { t } = useI18n()
-
-const attrs = useAttrs()
 
 const isDialogOpen = ref(false)
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { breakpointsTailwind } from '@vueuse/core'
+import { breakpoint } from '~/composables/breakpoint'
 import { useDutiesStore } from '~/features/duty/duty-store'
 import { useTabsStore } from '~/features/tab/tab-store'
 
@@ -10,8 +10,6 @@ defineOptions({
 const { t } = useI18n()
 const tabsStore = useTabsStore()
 const dutiesStore = useDutiesStore()
-const breakpoint = useBreakpoints(breakpointsTailwind)
-
 const largerThanLg = breakpoint.greater('lg')
 
 useHead({
@@ -30,23 +28,17 @@ onMounted(() => {
     <PanelSchedule class="flex-1/2 overflow-auto" />
     <PanelActivites class="flex-1/4 overflow-auto" />
   </div>
-  <Tabs v-else default-value="saved_duties" class="container flex-1 overflow-hidden py-4">
-    <TabsList class="mx-auto mb-4">
-      <TabsTrigger value="saved_duties">
-        {{ t('saved_duties') }}
-      </TabsTrigger>
-      <TabsTrigger value="schedule">
+  <Tabs v-else default-value="schedule" class="container flex-1 overflow-hidden py-4">
+    <TabsList class="mx-auto mb-4 h-auto *:text-base">
+      <TabsTrigger value="schedule" class="px-6 py-2">
         {{ t('schedule') }}
       </TabsTrigger>
-      <TabsTrigger value="activities">
+      <TabsTrigger value="activities" class="px-6 py-2">
         {{ t('activites') }}
       </TabsTrigger>
     </TabsList>
-    <TabsContent value="saved_duties" class="flex-1 overflow-auto">
-      <PanelSavedDuties class="h-full overflow-auto" />
-    </TabsContent>
     <TabsContent value="schedule" class="flex-1 overflow-auto">
-      <PanelSchedule class="h-full overflow-auto" />
+      <PanelScheduleMobile class="h-full overflow-auto" />
     </TabsContent>
     <TabsContent value="activities" class="flex-1 overflow-auto">
       <PanelActivites class="h-full overflow-auto" />

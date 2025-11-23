@@ -40,52 +40,6 @@ watch(
   },
 )
 
-function handleDragOver(event: DragEvent): void {
-  if (isPending.value)
-    return
-  event.preventDefault()
-
-  if (event.dataTransfer) {
-    event.dataTransfer.dropEffect = 'copy'
-  }
-}
-
-async function handleDrop(event: DragEvent, index: number): Promise<void> {
-  const timeboxLength = scheduledDuties.value[index].duties.length
-
-  if (timeboxLength >= 2) {
-    toast.error(t('toast.cannot_assign_duties'))
-    return
-  }
-  if (isPending.value)
-    return
-
-  isPending.value = true
-  event.preventDefault()
-
-  if (event.dataTransfer) {
-    try {
-      const data = event.dataTransfer.getData('application/json')
-      const droppedDuty: Duty = JSON.parse(data)
-
-      if (scheduledDuties.value[index].duties.find(d => d.id === droppedDuty.id)) {
-        toast.error(t('toast.duty_already_scheduled'))
-      }
-      else {
-        scheduledDuties.value[index].duties.push(droppedDuty)
-        assignedHour.value = scheduledDuties.value[index].time
-        await dutiesStore.assignHourDuty(droppedDuty, scheduledDuties.value[index].time)
-      }
-    }
-    catch (e) {
-      toast.error(t('console.dropped_data_error'))
-      console.error(`${t('console.dropped_data_error')}:`, e)
-    }
-  }
-  isPending.value = false
-  assignedHour.value = null
-}
-
 async function removeDuty(index: number, duty: Duty): Promise<void> {
   if (isPending.value)
     return
@@ -94,6 +48,36 @@ async function removeDuty(index: number, duty: Duty): Promise<void> {
 
   scheduledDuties.value[index].duties = scheduledDuties.value[index].duties.filter(d => d.id !== duty.id)
   await dutiesStore.reAssignHourDuty(duty, scheduledDuties.value[index].time)
+
+  isPending.value = false
+  assignedHour.value = null
+}
+
+async function handleSelectDuty(duty: Duty, scheduledDuty: typeof scheduledDuties.value[0], closeDialog: any): Promise<void> {
+  closeDialog()
+  const timeboxLength = scheduledDuty.duties.length
+  const time = scheduledDuty.time
+
+  if (isPending.value || timeboxLength >= 2) {
+    toast.error(t('toast.cannot_assign_duties'))
+    return
+  }
+
+  isPending.value = true
+  assignedHour.value = time
+  try {
+    if (scheduledDuty.duties.find(d => d.id === duty.id)) {
+      toast.error(t('toast.duty_already_scheduled'))
+    }
+    else {
+      scheduledDuty.duties.push(duty)
+      await dutiesStore.assignHourDuty(duty, time)
+    }
+  }
+  catch (e) {
+    toast.error(t('console.dropped_data_error'))
+    console.error(`${t('console.dropped_data_error')}:`, e)
+  }
 
   isPending.value = false
   assignedHour.value = null
@@ -109,16 +93,17 @@ async function removeDuty(index: number, duty: Duty): Promise<void> {
     </CardHeader>
     <template v-if="!isLoading">
       <CardContent class="grid grid-cols-2 lg:grid-cols-3 gap-4">
-        <TimeBox
+        <DialogTimeBox
           v-for="(dutySlot, index) in scheduledDuties"
           :key="dutySlot.time"
           :scheduled-duty="dutySlot"
           :index="index"
           :is-pending="isPending"
           :assigned-hour="assignedHour"
-          :handle-drag-over="handleDragOver"
-          :handle-drop="handleDrop"
           :remove-duty="removeDuty"
+          :handle-pending="(v: boolean) => isPending = v"
+          :handle-assign-hour="(v: number | null) => assignedHour = v"
+          :handle-select-duty="handleSelectDuty"
         />
       </CardContent>
     </template>

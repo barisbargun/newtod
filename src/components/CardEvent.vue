@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { Duty } from '~/features/duty/duty-schema'
+import { ChevronDown } from 'lucide-vue-next'
 import { dutyIcons } from '~/config/duty'
 
 const { duty } = defineProps<{
   duty: Duty
 }>()
+
+const largerThanLg = breakpoint.greater('lg')
 </script>
 
 <template>
@@ -20,5 +23,16 @@ const { duty } = defineProps<{
     <p class="text-xs text-muted-foreground">
       {{ duty.total_times }}x
     </p>
+    <DropdownMenu v-if="!largerThanLg">
+      <DropdownMenuTrigger as-child>
+        <Button variant="ghost" size="icon-lg" class="min-h-full" @click.stop>
+          <ChevronDown class="size-5" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent class="flex flex-col [&>button]:justify-start">
+        <DialogEditDuty :duty="duty" class="justify-start" />
+        <DialogDeleteDuty :id="duty.id" />
+      </DropdownMenuContent>
+    </DropdownMenu>
   </div>
 </template>
