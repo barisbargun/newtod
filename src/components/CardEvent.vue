@@ -25,7 +25,7 @@ const largerThanLg = breakpoint.greater('lg')
     </p>
     <DropdownMenu v-if="!largerThanLg">
       <DropdownMenuTrigger as-child>
-        <Button variant="ghost" size="icon-lg" class="min-h-full" @click.stop>
+        <Button variant="ghost" size="icon-lg" class="min-h-full ml-2" @click.stop>
           <ChevronDown class="size-5" />
         </Button>
       </DropdownMenuTrigger>

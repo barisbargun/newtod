@@ -2,7 +2,6 @@
 import type { PostgrestError } from '@supabase/supabase-js'
 import { Trash2 } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
-import { useDutiesStore } from '../duty-store'
 
 const { id } = defineProps<{
   id: string

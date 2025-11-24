@@ -6,6 +6,7 @@ import { supabase } from '~/lib/supabaseClient'
 
 export const useTabsStore = defineStore('tabs', () => {
   const tabs = ref<Tab[]>([])
+  const activeTabId = ref<string | null>(null)
   const isLoading = ref(false)
 
   const { t } = useI18n()
@@ -23,14 +24,13 @@ export const useTabsStore = defineStore('tabs', () => {
       }
 
       tabs.value = data.sort((a, b) => a.order - b.order)
+      activeTabId.value = tabs.value.length > 0 ? tabs.value[0].id : null
     }
     catch {
       toast.error(t('console.tab_load_error'))
       tabs.value = []
     }
-    finally {
-      isLoading.value = false
-    }
+    isLoading.value = false
   }
 
   const addTab = async (new_data: TabCreate) => {
@@ -110,6 +110,7 @@ export const useTabsStore = defineStore('tabs', () => {
 
   return {
     tabs,
+    activeTabId,
     isLoading,
     fetchTabs,
     addTab,

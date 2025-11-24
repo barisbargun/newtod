@@ -6,6 +6,9 @@ import { supabase } from '~/lib/supabaseClient'
 
 export const useDutiesStore = defineStore('duties', () => {
   const duties = ref<Duty[]>([])
+  const scheduledDuties = ref<{ time: number, duties: Duty[] }[]>(
+    Array.from({ length: 18 }, (_, i) => ({ time: 7 + i, duties: [] })),
+  )
   const isLoading = ref(false)
 
   const { t } = useI18n()
@@ -24,14 +27,25 @@ export const useDutiesStore = defineStore('duties', () => {
       }
 
       duties.value = data
+      if (data && data.length) {
+        const updatedSchedule: { time: number, duties: Duty[] }[] = []
+
+        for (const slot of scheduledDuties.value) {
+          const updatedDuty = data.filter(d => d.assigned_hours?.includes(slot.time))
+
+          updatedSchedule.push({
+            time: slot.time,
+            duties: updatedDuty || null,
+          })
+        }
+        scheduledDuties.value = updatedSchedule
+      }
     }
     catch {
       toast.error(t('console.duty_load_error'))
       duties.value = []
     }
-    finally {
-      isLoading.value = false
-    }
+    isLoading.value = false
   }
 
   const addDuty = async (new_data: DutyCreate, tab_id: string) => {
@@ -119,6 +133,7 @@ export const useDutiesStore = defineStore('duties', () => {
 
   return {
     duties,
+    scheduledDuties,
     isLoading,
     fetchDuties,
     addDuty,

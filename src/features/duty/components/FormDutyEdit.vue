@@ -13,7 +13,6 @@ import {
 import { Input } from '@/components/ui/input'
 import { dutyColors, dutyIcons } from '~/config/duty'
 import { useDutyUpdateSchema } from '../duty-schema'
-import { useDutiesStore } from '../duty-store'
 
 const { duty } = defineProps<{
   duty: Duty

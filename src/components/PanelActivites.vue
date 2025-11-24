@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import type { Duty } from '~/features/duty/duty-schema'
-import { storeToRefs } from 'pinia'
-import { useDutiesStore } from '~/features/duty/duty-store'
 
 const { t } = useI18n()
 const dutiesStore = useDutiesStore()
-const { duties: unsortedDuties, isLoading: dutiesLoading } = storeToRefs(dutiesStore)
+const { duties: unsortedDuties } = storeToRefs(dutiesStore)
 
 const duties = ref<Duty[]>()
 
@@ -16,7 +14,7 @@ const totalDuties = computed(() => duties.value?.reduce((prev, curr) => {
 const colors = computed(() => duties.value?.map(item => item.color))
 
 watchEffect(() => {
-  if (unsortedDuties.value.length && !dutiesLoading.value) {
+  if (unsortedDuties.value.length) {
     duties.value = unsortedDuties.value.filter(d => d.tw_times).sort((a, b) => b.tw_times - a.tw_times)
   }
 })
@@ -33,7 +31,7 @@ function getPercentage(partial: number, total: number) {
         {{ t("week_activites") }}
       </CardTitle>
     </CardHeader>
-    <template v-if="!dutiesLoading && duties?.length">
+    <template v-if="duties?.length">
       <CardContent class="flex justify-between relative mt-[20%]">
         <DonutChart
           index="name"
@@ -57,10 +55,9 @@ function getPercentage(partial: number, total: number) {
         </ul>
       </CardFooter>
     </template>
-    <p v-else-if="!duties?.length" class="px-6">
+    <p v-else class="px-6">
       {{ t("info.no_activities_yet") }}
       <strong class="block mt-4 font-normal">{{ t("info.activities_reset") }}</strong>
     </p>
-    <Spinner v-else class="m-auto size-20" />
   </Card>
 </template>

@@ -3,16 +3,8 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useForm, Field as VeeField } from 'vee-validate'
 
 import { toast } from 'vue-sonner'
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
 import { dutyColors, dutyIcons } from '~/config/duty'
 import { useDutyCreateSchema } from '../duty-schema'
-import { useDutiesStore } from '../duty-store'
 
 const emit = defineEmits(['formSubmitted'])
 
@@ -20,7 +12,8 @@ const { t } = useI18n()
 const { addDuty } = useDutiesStore()
 const isPending = ref(false)
 
-const activeTabId = inject('active_tab_id') as Ref<string | null>
+const tabsStore = useTabsStore()
+const { activeTabId } = storeToRefs(tabsStore)
 
 const dutyCreateSchema = useDutyCreateSchema()
 

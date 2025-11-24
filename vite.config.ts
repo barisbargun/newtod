@@ -34,6 +34,9 @@ export default defineConfig({
     }),
 
     VueMacros({
+      betterDefine: {
+        exclude: ['src/components/ui/**/*.vue'],
+      },
       plugins: {
         vue: Vue({
           include: [/\.vue$/, /\.md$/],
@@ -57,6 +60,10 @@ export default defineConfig({
         {
           // add any other imports you were relying on
           'vue-router/auto': ['useLink'],
+          'pinia': ['storeToRefs'],
+          '@/features/tab/tab-store': ['useTabsStore'],
+          '@/features/duty/duty-store': ['useDutiesStore'],
+          '@/features/user/user-store': ['useUserStore'],
         },
       ],
       dts: 'src/auto-imports.d.ts',

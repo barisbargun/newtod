@@ -4,10 +4,12 @@ const { user } = storeToRefs(userStore)
 </script>
 
 <template>
-  <div v-if="user" class="flex flex-col w-full overflow-hidden h-screen">
-    <Navbar :user="user" />
-    <RouterView />
-    <Footer />
-  </div>
+  <template v-if="!user">
+    <Navbar />
+    <main class="w-full flex flex-col flex-1">
+      <RouterView />
+      <Footer />
+    </main>
+  </template>
   <Spinner v-else class="m-auto size-8" />
 </template>

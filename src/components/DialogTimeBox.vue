@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import type { Duty } from '~/features/duty/duty-schema'
 import { CircleX } from 'lucide-vue-next'
-import { storeToRefs } from 'pinia'
-import { useDutiesStore } from '~/features/duty/duty-store'
-import { useTabsStore } from '~/features/tab/tab-store'
 
 const { scheduledDuty, index, isPending, assignedHour, removeDuty, handleSelectDuty,
 } = defineProps<{
@@ -22,23 +19,15 @@ const isDialogOpen = ref(false)
 
 const tabsStore = useTabsStore()
 const dutiesStore = useDutiesStore()
-const { tabs, isLoading: tabsLoading } = storeToRefs(tabsStore)
-const { duties, isLoading: dutiesLoading } = storeToRefs(dutiesStore)
-
-const active_tab_id = ref<string | null>(null)
-
-watch(tabs, (newTabs) => {
-  if (newTabs && newTabs.length) {
-    active_tab_id.value = newTabs[0].id
-  }
-}, { immediate: true })
-
-const isLoading = computed(() => tabsLoading.value || dutiesLoading.value)
-
-provide('active_tab_id', active_tab_id)
+const { tabs, activeTabId } = storeToRefs(tabsStore)
+const { duties } = storeToRefs(dutiesStore)
 
 async function handleSelect(duty: Duty): Promise<void> {
   handleSelectDuty(duty, scheduledDuty, () => isDialogOpen.value = false)
+}
+
+function setActiveTab(tabId: string): void {
+  activeTabId.value = tabId
 }
 </script>
 
@@ -71,39 +60,36 @@ async function handleSelect(duty: Duty): Promise<void> {
           {{ t("saved_duties") }}
         </DialogTitle>
       </DialogHeader>
-      <template v-if="!isLoading">
-        <div>
-          <div class="flex justify-end items-center gap-2">
-            <DialogSwapTab v-if="tabs.length > 1" :tabs="tabs" />
-            <DialogNewTab />
-          </div>
-          <Tabs :default-value="tabs.length ? tabs[0].name : ''" class="w-full">
-            <div class="flex justify-between items-center gap-2">
-              <div class="w-full overflow-auto pb-2">
-                <TabsList class="justify-start">
-                  <TabContextMenu v-for="tab in tabs" :key="tab.id" :tab="tab">
-                    <TabsTrigger :value="tab.name" @click="active_tab_id = tab.id">
-                      {{ tab.name }}
-                    </TabsTrigger>
-                  </TabContextMenu>
-                </TabsList>
-              </div>
-            </div>
-            <TabsContent v-for="tab in tabs" :key="tab.id" class="flex-1 h-full" :tab="tab" :value="tab.name">
-              <DutyContextMenu v-for="duty in duties.filter(d => tab.id === d.tab_id)" :key="duty.id" :duty="duty">
-                <CardEvent
-                  :duty="duty"
-                  class="not-last:mb-3 w-full"
-                  color="#9784eb"
-                  @click="handleSelect(duty)"
-                />
-              </DutyContextMenu>
-            </TabsContent>
-          </Tabs>
+      <div>
+        <div class="flex justify-end items-center gap-2">
+          <DialogSwapTab v-if="tabs.length > 1" :tabs="tabs" />
+          <DialogNewTab />
         </div>
-        <DialogNewDuty v-if="active_tab_id" class="mx-auto mt-" :tab-id="active_tab_id" />
-      </template>
-      <Spinner v-else class="m-auto size-20" />
+        <Tabs :default-value="tabs.length ? tabs[0].name : ''" class="w-full">
+          <div class="flex justify-between items-center gap-2">
+            <div class="w-full overflow-auto pb-2">
+              <TabsList class="justify-start">
+                <TabContextMenu v-for="tab in tabs" :key="tab.id" :tab="tab">
+                  <TabsTrigger :value="tab.name" @click="setActiveTab(tab.id)">
+                    {{ tab.name }}
+                  </TabsTrigger>
+                </TabContextMenu>
+              </TabsList>
+            </div>
+          </div>
+          <TabsContent v-for="tab in tabs" :key="tab.id" class="flex-1 h-full" :tab="tab" :value="tab.name">
+            <DutyContextMenu v-for="duty in duties.filter(d => tab.id === d.tab_id)" :key="duty.id" :duty="duty">
+              <CardEvent
+                :duty="duty"
+                class="not-last:mb-3 w-full"
+                color="#9784eb"
+                @click="handleSelect(duty)"
+              />
+            </DutyContextMenu>
+          </TabsContent>
+        </Tabs>
+      </div>
+      <DialogNewDuty v-if="activeTabId" class="mx-auto mt-" :tab-id="activeTabId" />
     </DialogContent>
   </Dialog>
 </template>

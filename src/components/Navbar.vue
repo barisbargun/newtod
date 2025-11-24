@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { User } from '~/features/user/user-store'
-import { ChevronDown, Languages, Moon, SunMedium } from 'lucide-vue-next'
+import { ChevronDown, CircleUser, Languages, Moon, SunMedium } from 'lucide-vue-next'
 
 import { site } from '~/config/site'
 import { availableLocales, loadLanguageAsync } from '~/modules/i18n'
@@ -32,7 +32,7 @@ async function toggleLocales() {
         <template v-if="user">
           <Avatar>
             <AvatarImage :src="user.avatar_url || ''" alt="current_user" />
-            <AvatarFallback>CU</AvatarFallback>
+            <AvatarFallback><CircleUser /></AvatarFallback>
           </Avatar>
           <DropdownMenu>
             <DropdownMenuTrigger as-child>

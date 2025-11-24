@@ -27,5 +27,5 @@ function signWithGoogle() {
 <route lang="yaml">
 meta:
   requiresGuest: true
-  layout: index
+  layout: auth
 </route>

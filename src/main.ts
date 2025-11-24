@@ -6,7 +6,6 @@ import { ViteSSG } from 'vite-ssg'
 
 import { routes } from 'vue-router/auto-routes'
 
-import { useUserStore } from '~/features/user/user-store'
 import { supabase } from '~/lib/supabaseClient'
 import App from './App.vue'
 
@@ -46,6 +45,8 @@ export const createApp = ViteSSG(
 
       const requiresAuth = to.meta.requiresAuth
       const requiresGuest = to.meta.requiresGuest
+
+      await new Promise(resolve => setTimeout(resolve, 1200))
 
       if (requiresAuth && !isLoggedIn) {
         next({
