@@ -16,3 +16,9 @@ A TODO application that you can add, edit, save, and drag and drop your duties t
 **Responsive Design**: Ensures optimal display and functionality across all devices.
 
 **Auto Translation**: You can translate the website by clicking button
+
+## <a name="features">Previews</a>
+
+<img src="./.github/screenshot1.avif" alt="Banner 1">
+<br/>
+<img src="./.github/screenshot2.avif" alt="Banner 2">
