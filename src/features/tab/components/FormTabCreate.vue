@@ -3,12 +3,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useForm, Field as VeeField } from 'vee-validate'
 
 import { toast } from 'vue-sonner'
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from '@/components/ui/field'
+import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { useTabUpdateSchema } from '../tab-schema'
 import { useTabsStore } from '../tab-store'
@@ -24,8 +19,8 @@ const tabCreateSchema = useTabUpdateSchema()
 const { handleSubmit, resetForm } = useForm({
   validationSchema: toTypedSchema(tabCreateSchema),
   initialValues: {
-    name: '',
-  },
+    name: ''
+  }
 })
 
 const onSubmit = handleSubmit(async (data) => {
@@ -35,8 +30,7 @@ const onSubmit = handleSubmit(async (data) => {
     toast.success(t('toast.tab_add_success'))
     resetForm()
     emit('formSubmitted')
-  }
-  else {
+  } else {
     toast.error(t('toast.an_error_happened', { msg: result.error.message }))
   }
   isPending.value = false

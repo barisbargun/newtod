@@ -2,7 +2,7 @@
 import { breakpoint } from '~/composables/breakpoint'
 
 defineOptions({
-  name: 'Home',
+  name: 'Home'
 })
 
 const { t } = useI18n()
@@ -12,7 +12,7 @@ const dutiesStore = useDutiesStore()
 const largerThanLg = breakpoint.greater('lg')
 
 useHead({
-  title: () => t('button.dashboard'),
+  title: () => t('button.dashboard')
 })
 
 onMounted(() => {
@@ -23,7 +23,10 @@ onMounted(() => {
 
 <template>
   <template v-if="!tabsStore.isLoading || !dutiesStore.isLoading">
-    <div v-if="largerThanLg" class="flex justify-between gap-5 container mx-auto flex-1 overflow-hidden py-4">
+    <div
+      v-if="largerThanLg"
+      class="container mx-auto flex flex-1 justify-between gap-5 overflow-hidden py-4"
+    >
       <PanelSavedDuties class="flex-1/4 overflow-auto" />
       <PanelSchedule class="flex-1/2 overflow-auto" />
       <PanelActivites class="flex-1/4 overflow-auto" />

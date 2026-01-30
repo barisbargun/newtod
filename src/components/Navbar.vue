@@ -20,15 +20,15 @@ async function toggleLocales() {
 </script>
 
 <template>
-  <header class="bg-card w-full py-2 border-b">
+  <header class="bg-card w-full border-b py-2">
     <div class="container flex items-center justify-between">
       <div class="flex items-center justify-center gap-2">
-        <img src="/assets/logo.avif" alt="logo" class="size-5 rounded-full">
+        <img src="/assets/logo.avif" alt="logo" class="size-5 rounded-full" />
         <RouterLink class="font-poppins font-medium" :to="{ name: '/' }">
           {{ site.title }}
         </RouterLink>
       </div>
-      <nav class="flex justify-center items-center gap-4">
+      <nav class="flex items-center justify-center gap-4">
         <template v-if="user">
           <Avatar>
             <AvatarImage :src="user.avatar_url || ''" alt="current_user" />
@@ -60,8 +60,17 @@ async function toggleLocales() {
             </Button>
           </RouterLink>
 
-          <Languages class="size-5 cursor-pointer" :title="t('button.toggle_langs')" @click="toggleLocales()" />
-          <component :is="isDark ? SunMedium : Moon" class="size-5 cursor-pointer" :title="t('button.toggle_dark')" @click="toggleDark()" />
+          <Languages
+            class="size-5 cursor-pointer"
+            :title="t('button.toggle_langs')"
+            @click="toggleLocales()"
+          />
+          <component
+            :is="isDark ? SunMedium : Moon"
+            class="size-5 cursor-pointer"
+            :title="t('button.toggle_dark')"
+            @click="toggleDark()"
+          />
         </template>
       </nav>
     </div>

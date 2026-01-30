@@ -14,8 +14,7 @@ export function useValidationMessages() {
 
     if (isNumber) {
       key = type === 'min' ? 'validation.min_number' : 'validation.max_number'
-    }
-    else {
+    } else {
       key = type === 'min' ? 'validation.min_chars' : 'validation.max_chars'
     }
 

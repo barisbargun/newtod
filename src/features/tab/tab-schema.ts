@@ -4,9 +4,10 @@ import { useValidationMessages } from '~/lib/utils'
 export function useTabCreateSchema() {
   const validationMsg = useValidationMessages()
   return z.object({
-    name: z.string()
+    name: z
+      .string()
       .min(3, { message: validationMsg('min', 3) })
-      .max(150, { message: validationMsg('max', 150) }),
+      .max(150, { message: validationMsg('max', 150) })
   })
 }
 

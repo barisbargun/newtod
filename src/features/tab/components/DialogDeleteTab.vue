@@ -19,8 +19,7 @@ async function handleDelete() {
     await deleteTab(id)
     toast.success(t('toast.tab_delete_success'))
     isDialogOpen.value = false
-  }
-  catch (error) {
+  } catch (error) {
     toast.error(t('toast.an_error_happened', { msg: (error as PostgrestError).message }))
   }
 
@@ -31,9 +30,7 @@ async function handleDelete() {
 <template>
   <Dialog :open="isDialogOpen" @update:open="isDialogOpen = $event">
     <DialogTrigger as-child>
-      <Button variant="ghost">
-        <Trash2 /> {{ t('button.delete') }}
-      </Button>
+      <Button variant="ghost"> <Trash2 /> {{ t('button.delete') }} </Button>
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>

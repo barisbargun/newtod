@@ -4,12 +4,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 
 import { useForm, Field as VeeField } from 'vee-validate'
 import { toast } from 'vue-sonner'
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from '@/components/ui/field'
+import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { dutyColors, dutyIcons } from '~/config/duty'
 import { useDutyUpdateSchema } from '../duty-schema'
@@ -31,8 +26,8 @@ const { handleSubmit, resetForm } = useForm({
   initialValues: {
     name: duty.name,
     color: duty.color,
-    icon: duty.icon,
-  },
+    icon: duty.icon
+  }
 })
 
 const onSubmit = handleSubmit(async (data) => {
@@ -42,8 +37,7 @@ const onSubmit = handleSubmit(async (data) => {
     toast.success(t('toast.duty_edit_success'))
     resetForm()
     emit('formSubmitted')
-  }
-  else {
+  } else {
     toast.error(t('toast.an_error_happened', { msg: result.error.message }))
   }
   isPending.value = false
@@ -73,12 +67,12 @@ const onSubmit = handleSubmit(async (data) => {
           <FieldLabel for="form-duty-color">
             {{ t('label.color') }}
           </FieldLabel>
-          <ul class="flex gap-3 flex-row">
+          <ul class="flex flex-row gap-3">
             <li
               v-for="color in dutyColors"
               :key="color"
-              class="size-6 rounded-full cursor-pointer relative transition-all duration-150"
-              :class="{ 'ring-2 ring-offset-2 ring-primary': field.value === color }"
+              class="relative size-6 cursor-pointer rounded-full transition-all duration-150"
+              :class="{ 'ring-primary ring-2 ring-offset-2': field.value === color }"
               :style="{ backgroundColor: color }"
               @click="field.onChange(color)"
             />
@@ -91,26 +85,22 @@ const onSubmit = handleSubmit(async (data) => {
           <FieldLabel for="form-duty-icon">
             {{ t('label.icon') }}
           </FieldLabel>
-          <ul class="flex flex-wrap gap-2 p-2 border rounded-lg bg-card max-h-40 overflow-y-auto">
+          <ul class="bg-card flex max-h-40 flex-wrap gap-2 overflow-y-auto rounded-lg border p-2">
             <li
               v-for="(IconComponent, iconKey) in dutyIcons"
               :key="iconKey"
-              class="size-10 rounded-lg cursor-pointer flex items-center justify-center transition-all duration-200"
+              class="flex size-10 cursor-pointer items-center justify-center rounded-lg transition-all duration-200"
               :class="{
                 'bg-foreground text-background hover:brightness-125': field.value !== iconKey,
-                'bg-secondary text-secondary-foreground shadow-lg ring-2 ring-primary': field.value === iconKey,
+                'bg-secondary text-secondary-foreground ring-primary shadow-lg ring-2':
+                  field.value === iconKey
               }"
               @click="field.onChange(iconKey)"
             >
               <component :is="IconComponent" class="size-6" />
             </li>
           </ul>
-          <input
-            id="form-duty-icon"
-            type="hidden"
-            v-bind="field"
-            autocomplete="off"
-          >
+          <input id="form-duty-icon" type="hidden" v-bind="field" autocomplete="off" />
           <FieldError v-if="errors.length" :errors="errors" />
         </Field>
       </VeeField>

@@ -55,16 +55,16 @@ function setActiveTab(tabId: string): void {
   <Card>
     <CardHeader class="flex-center! justify-between!">
       <CardTitle>
-        {{ t("saved_duties") }}
+        {{ t('saved_duties') }}
       </CardTitle>
     </CardHeader>
     <CardContent class="relative">
-      <div class="flex justify-end items-center gap-2">
+      <div class="flex items-center justify-end gap-2">
         <DialogSwapTab v-if="tabs.length > 1" :tabs="tabs" />
         <DialogNewTab />
       </div>
       <Tabs v-if="activeTabId" :default-value="activeTabId" class="w-full">
-        <div class="flex justify-between items-center gap-2">
+        <div class="flex items-center justify-between gap-2">
           <div class="w-full overflow-auto pb-2">
             <TabsList class="justify-start">
               <TabContextMenu v-for="tab in tabs" :key="tab.id" :tab="tab">
@@ -75,19 +75,11 @@ function setActiveTab(tabId: string): void {
             </TabsList>
           </div>
         </div>
-        <TabsContent
-          v-for="tab in tabs"
-          :key="tab.id"
-          :value="tab.id"
-        >
-          <DutyContextMenu
-            v-for="duty of dutiesByTab.get(tab.id)"
-            :key="duty.id"
-            :duty="duty"
-          >
+        <TabsContent v-for="tab in tabs" :key="tab.id" :value="tab.id">
+          <DutyContextMenu v-for="duty of dutiesByTab.get(tab.id)" :key="duty.id" :duty="duty">
             <CardEvent
               :duty="duty"
-              class="not-last:mb-4 w-full cursor-move"
+              class="w-full cursor-move not-last:mb-4"
               color="#9784eb"
               draggable="true"
               @dragstart="handleDragStart($event, duty)"

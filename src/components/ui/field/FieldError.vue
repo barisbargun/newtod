@@ -9,8 +9,7 @@ const props = defineProps<{
 }>()
 
 const content = computed(() => {
-  if (!props.errors || props.errors.length === 0)
-    return null
+  if (!props.errors || props.errors.length === 0) return null
 
   if (props.errors.length === 1) {
     return props.errors[0]

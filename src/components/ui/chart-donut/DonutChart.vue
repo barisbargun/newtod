@@ -8,37 +8,45 @@ import { computed, ref } from 'vue'
 import { ChartSingleTooltip, defaultColors } from '@/components/ui/chart'
 import { cn } from '@/lib/utils'
 
-const props = withDefaults(defineProps<Pick<BaseChartProps<T>, 'data' | 'colors' | 'index' | 'margin' | 'showLegend' | 'showTooltip' | 'filterOpacity'> & {
-  /**
-   * Sets the name of the key containing the quantitative chart values.
-   */
-  category: KeyOfT
-  /**
-   * Change the type of the chart
-   * @default "donut"
-   */
-  type?: 'donut' | 'pie'
-  /**
-   * Function to sort the segment
-   */
-  sortFunction?: (a: any, b: any) => number | undefined
-  /**
-   * Render custom tooltip component.
-   */
-  customTooltip?: Component
+const props = withDefaults(
+  defineProps<
+    Pick<
+      BaseChartProps<T>,
+      'data' | 'colors' | 'index' | 'margin' | 'showLegend' | 'showTooltip' | 'filterOpacity'
+    > & {
+      /**
+       * Sets the name of the key containing the quantitative chart values.
+       */
+      category: KeyOfT
+      /**
+       * Change the type of the chart
+       * @default "donut"
+       */
+      type?: 'donut' | 'pie'
+      /**
+       * Function to sort the segment
+       */
+      sortFunction?: (a: any, b: any) => number | undefined
+      /**
+       * Render custom tooltip component.
+       */
+      customTooltip?: Component
 
-  totalValue?: number
-}>(), {
-  margin: () => ({ top: 0, bottom: 0, left: 0, right: 0 }),
-  sortFunction: () => undefined,
-  type: 'donut',
-  filterOpacity: 0.2,
-  showTooltip: true,
-  showLegend: true,
-})
+      totalValue?: number
+    }
+  >(),
+  {
+    margin: () => ({ top: 0, bottom: 0, left: 0, right: 0 }),
+    sortFunction: () => undefined,
+    type: 'donut',
+    filterOpacity: 0.2,
+    showTooltip: true,
+    showLegend: true
+  }
+)
 
 type KeyOfT = Extract<keyof T, string>
-type Data = typeof props.data[number]
+type Data = (typeof props.data)[number]
 
 const { t } = useI18n()
 const category = computed(() => props.category as KeyOfT)
@@ -46,23 +54,33 @@ const index = computed(() => props.index as KeyOfT)
 
 const isMounted = useMounted()
 const activeSegmentKey = ref<string>()
-const colors = computed(() => props.colors?.length ? props.colors : defaultColors(props.data.filter(d => d[props.category]).filter(Boolean).length))
-const legendItems = computed(() => props.data.map((item, i) => ({
-  name: item[props.index],
-  color: colors.value[i],
-  inactive: false,
-})))
+const colors = computed(() =>
+  props.colors?.length
+    ? props.colors
+    : defaultColors(props.data.filter((d) => d[props.category]).filter(Boolean).length)
+)
+const legendItems = computed(() =>
+  props.data.map((item, i) => ({
+    name: item[props.index],
+    color: colors.value[i],
+    inactive: false
+  }))
+)
 </script>
 
 <template>
-  <div :class="cn('w-full h-48 flex flex-col items-end', $attrs.class ?? '')">
-    <VisSingleContainer :style="{ height: isMounted ? '100%' : 'auto' }" :margin="{ left: 20, right: 20 }" :data="data">
+  <div :class="cn('flex h-48 w-full flex-col items-end', $attrs.class ?? '')">
+    <VisSingleContainer
+      :style="{ height: isMounted ? '100%' : 'auto' }"
+      :margin="{ left: 20, right: 20 }"
+      :data="data"
+    >
       <ChartSingleTooltip
         :selector="Donut.selectors.segment"
         :index="category"
         :items="legendItems"
         :custom-tooltip="customTooltip"
-        style="background-color: red !important;"
+        style="background-color: red !important"
       />
 
       <VisDonut
@@ -72,21 +90,19 @@ const legendItems = computed(() => props.data.map((item, i) => ({
         :arc-width="type === 'donut' ? 20 : 0"
         :show-background="false"
         :central-label="type === 'donut' ? t('label.total_duties', { count: totalValue }) : ''"
-
         :events="{
           [Donut.selectors.segment]: {
             click: (d: Data, ev: PointerEvent, i: number, elements: HTMLElement[]) => {
               if (d?.data?.[index] === activeSegmentKey) {
                 activeSegmentKey = undefined
-                elements.forEach(el => el.style.opacity = '1')
-              }
-              else {
+                elements.forEach((el) => (el.style.opacity = '1'))
+              } else {
                 activeSegmentKey = d?.data?.[index]
-                elements.forEach(el => el.style.opacity = `${filterOpacity}`)
+                elements.forEach((el) => (el.style.opacity = `${filterOpacity}`))
                 elements[i].style.opacity = '1'
               }
-            },
-          },
+            }
+          }
         }"
       />
 

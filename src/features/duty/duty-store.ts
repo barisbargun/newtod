@@ -6,8 +6,8 @@ import { supabase } from '~/lib/supabaseClient'
 
 export const useDutiesStore = defineStore('duties', () => {
   const duties = ref<Duty[]>([])
-  const scheduledDuties = ref<{ time: number, duties: Duty[] }[]>(
-    Array.from({ length: 18 }, (_, i) => ({ time: 7 + i, duties: [] })),
+  const scheduledDuties = ref<{ time: number; duties: Duty[] }[]>(
+    Array.from({ length: 18 }, (_, i) => ({ time: 7 + i, duties: [] }))
   )
   const isLoading = ref(false)
 
@@ -18,9 +18,7 @@ export const useDutiesStore = defineStore('duties', () => {
 
     try {
       // Supabase sorgusu
-      const { data, error } = await supabase
-        .from('duties')
-        .select('*')
+      const { data, error } = await supabase.from('duties').select('*')
 
       if (error) {
         throw error
@@ -28,20 +26,19 @@ export const useDutiesStore = defineStore('duties', () => {
 
       duties.value = data
       if (data && data.length) {
-        const updatedSchedule: { time: number, duties: Duty[] }[] = []
+        const updatedSchedule: { time: number; duties: Duty[] }[] = []
 
         for (const slot of scheduledDuties.value) {
-          const updatedDuty = data.filter(d => d.assigned_hours?.includes(slot.time))
+          const updatedDuty = data.filter((d) => d.assigned_hours?.includes(slot.time))
 
           updatedSchedule.push({
             time: slot.time,
-            duties: updatedDuty || null,
+            duties: updatedDuty || null
           })
         }
         scheduledDuties.value = updatedSchedule
       }
-    }
-    catch {
+    } catch {
       toast.error(t('console.duty_load_error'))
       duties.value = []
     }
@@ -61,13 +58,9 @@ export const useDutiesStore = defineStore('duties', () => {
   }
 
   const deleteDuty = async (id: string) => {
-    const { error } = await supabase
-      .from('duties')
-      .delete()
-      .eq('id', id)
+    const { error } = await supabase.from('duties').delete().eq('id', id)
 
-    if (error)
-      throw error
+    if (error) throw error
 
     const newDuties = []
     for (const duty of duties.value) {
@@ -79,14 +72,10 @@ export const useDutiesStore = defineStore('duties', () => {
   }
 
   const editDuty = async (id: string, new_data: DutyUpdate) => {
-    const result = await supabase
-      .from('duties')
-      .update(new_data)
-      .eq('id', id)
-      .select()
+    const result = await supabase.from('duties').update(new_data).eq('id', id).select()
 
     if (!result.error && result.data) {
-      const index = duties.value.findIndex(duty => duty.id === id)
+      const index = duties.value.findIndex((duty) => duty.id === id)
       if (index !== -1) {
         duties.value[index] = result.data[0]
       }
@@ -105,7 +94,7 @@ export const useDutiesStore = defineStore('duties', () => {
       .select()
 
     if (!result.error && result.data) {
-      const index = duties.value.findIndex(d => d.id === duty.id)
+      const index = duties.value.findIndex((d) => d.id === duty.id)
       if (index !== -1) {
         duties.value[index] = result.data[0]
       }
@@ -114,7 +103,7 @@ export const useDutiesStore = defineStore('duties', () => {
   }
 
   const reAssignHourDuty = async (duty: Duty, hour: number) => {
-    const hours = duty.assigned_hours?.filter(h => h !== hour) || []
+    const hours = duty.assigned_hours?.filter((h) => h !== hour) || []
 
     const result = await supabase
       .from('duties')
@@ -123,7 +112,7 @@ export const useDutiesStore = defineStore('duties', () => {
       .select()
 
     if (!result.error && result.data) {
-      const index = duties.value.findIndex(d => d.id === duty.id)
+      const index = duties.value.findIndex((d) => d.id === duty.id)
       if (index !== -1) {
         duties.value[index] = result.data[0]
       }
@@ -140,9 +129,8 @@ export const useDutiesStore = defineStore('duties', () => {
     deleteDuty,
     editDuty,
     assignHourDuty,
-    reAssignHourDuty,
+    reAssignHourDuty
   }
 })
 
-if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useDutiesStore as any, import.meta.hot))
+if (import.meta.hot) import.meta.hot.accept(acceptHMRUpdate(useDutiesStore as any, import.meta.hot))

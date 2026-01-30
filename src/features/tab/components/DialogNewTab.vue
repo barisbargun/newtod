@@ -2,7 +2,7 @@
 import { Plus } from 'lucide-vue-next'
 
 defineOptions({
-  inheritAttrs: false,
+  inheritAttrs: false
 })
 
 const attrs = useAttrs()
@@ -19,7 +19,7 @@ function closeDialog() {
   <Dialog :open="isDialogOpen" @update:open="isDialogOpen = $event">
     <DialogTrigger as-child>
       <Button size="icon" variant="ghost" v-bind="attrs">
-        <Plus class="size-5 text-primary" />
+        <Plus class="text-primary size-5" />
       </Button>
     </DialogTrigger>
     <DialogContent>

@@ -11,8 +11,7 @@ const isPending = ref(false)
 const assignedHour = ref<number | null>(null)
 
 function handleDragOver(event: DragEvent): void {
-  if (isPending.value)
-    return
+  if (isPending.value) return
   event.preventDefault()
 
   if (event.dataTransfer) {
@@ -27,8 +26,7 @@ async function handleDrop(event: DragEvent, index: number): Promise<void> {
     toast.error(t('toast.cannot_assign_duties'))
     return
   }
-  if (isPending.value)
-    return
+  if (isPending.value) return
 
   isPending.value = true
   event.preventDefault()
@@ -38,16 +36,14 @@ async function handleDrop(event: DragEvent, index: number): Promise<void> {
       const data = event.dataTransfer.getData('application/json')
       const droppedDuty: Duty = JSON.parse(data)
 
-      if (scheduledDuties.value[index].duties.find(d => d.id === droppedDuty.id)) {
+      if (scheduledDuties.value[index].duties.find((d) => d.id === droppedDuty.id)) {
         toast.error(t('toast.duty_already_scheduled'))
-      }
-      else {
+      } else {
         scheduledDuties.value[index].duties.push(droppedDuty)
         assignedHour.value = scheduledDuties.value[index].time
         await dutiesStore.assignHourDuty(droppedDuty, scheduledDuties.value[index].time)
       }
-    }
-    catch (e) {
+    } catch (e) {
       toast.error(t('console.dropped_data_error'))
       console.error(`${t('console.dropped_data_error')}:`, e)
     }
@@ -57,12 +53,13 @@ async function handleDrop(event: DragEvent, index: number): Promise<void> {
 }
 
 async function removeDuty(index: number, duty: Duty): Promise<void> {
-  if (isPending.value)
-    return
+  if (isPending.value) return
   isPending.value = true
   assignedHour.value = scheduledDuties.value[index].time
 
-  scheduledDuties.value[index].duties = scheduledDuties.value[index].duties.filter(d => d.id !== duty.id)
+  scheduledDuties.value[index].duties = scheduledDuties.value[index].duties.filter(
+    (d) => d.id !== duty.id
+  )
   await dutiesStore.reAssignHourDuty(duty, scheduledDuties.value[index].time)
 
   isPending.value = false
@@ -72,12 +69,12 @@ async function removeDuty(index: number, duty: Duty): Promise<void> {
 
 <template>
   <Card>
-    <CardHeader class="flex-center! justify-between! ">
+    <CardHeader class="flex-center! justify-between!">
       <CardTitle>
-        {{ t("time_schedule") }}
+        {{ t('time_schedule') }}
       </CardTitle>
     </CardHeader>
-    <CardContent class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+    <CardContent class="grid grid-cols-2 gap-4 lg:grid-cols-3">
       <TimeBox
         v-for="(dutySlot, index) in scheduledDuties"
         :key="dutySlot.time"

@@ -9,16 +9,20 @@ function signWithGoogle() {
   supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: `${window.location.origin}${redirectToPath}`,
-    },
+      redirectTo: `${window.location.origin}${redirectToPath}`
+    }
   })
 }
 </script>
 
 <template>
   <div class="flex-center flex-1">
-    <Button class="bg-white dark:bg-gray-900 border border-foreground/15 shadow-md text-foreground hover:bg-gray-200 dark:hover:bg-gray-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" size="lg" @click="signWithGoogle">
-      <img src="/assets/icons/icon-google.svg" class="size-5">
+    <Button
+      class="border-foreground/15 text-foreground border bg-white shadow-md hover:bg-gray-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none dark:bg-gray-900 dark:hover:bg-gray-950"
+      size="lg"
+      @click="signWithGoogle"
+    >
+      <img src="/assets/icons/icon-google.svg" class="size-5" />
       {{ t('button.login_google') }}
     </Button>
   </div>

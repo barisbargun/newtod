@@ -6,9 +6,9 @@ useHead({
   meta: [
     {
       name: 'theme-color',
-      content: () => isDark.value ? '#0f0f1a' : '#ffffff',
-    },
-  ],
+      content: () => (isDark.value ? '#0f0f1a' : '#ffffff')
+    }
+  ]
 })
 </script>
 

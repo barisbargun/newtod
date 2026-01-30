@@ -2,7 +2,7 @@
 import { Plus } from 'lucide-vue-next'
 
 defineOptions({
-  inheritAttrs: false,
+  inheritAttrs: false
 })
 const attrs = useAttrs()
 

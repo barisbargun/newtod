@@ -18,7 +18,7 @@ import {
   Sparkles,
   Sun,
   Users,
-  Utensils,
+  Utensils
 } from 'lucide-vue-next'
 
 export const dutyIcons = {
@@ -54,16 +54,9 @@ export const dutyIcons = {
 
   // Time/Weather (e.g., morning routine, night task)
   sun: Sun,
-  moon: Moon,
+  moon: Moon
 } as const
 
 export type DutyIconKey = keyof typeof dutyIcons
 
-export const dutyColors = [
-  '#F87171',
-  '#FBBF24',
-  '#34D399',
-  '#60A5FA',
-  '#A78BFA',
-  '#F472B6',
-]
+export const dutyColors = ['#F87171', '#FBBF24', '#34D399', '#60A5FA', '#A78BFA', '#F472B6']

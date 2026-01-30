@@ -2,17 +2,17 @@
 const router = useRouter()
 const { t } = useI18n()
 useHead({
-  title: () => t('not-found'),
+  title: () => t('not-found')
 })
 </script>
 
 <template>
-  <main class="flex-center text-center flex-col flex-1">
-    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">
+  <main class="flex-center flex-1 flex-col text-center">
+    <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl">
       {{ t('page_not_exist') }}
     </h1>
 
-    <p class="text-lg mx-auto mt-4 mb-3 leading-relaxed">
+    <p class="mx-auto mt-4 mb-3 text-lg leading-relaxed">
       {{ t('head_back_page') }}
     </p>
     <Button variant="outline" @click="router.back()">

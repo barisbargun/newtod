@@ -15,9 +15,7 @@ export const useTabsStore = defineStore('tabs', () => {
     isLoading.value = true
 
     try {
-      const { data, error } = await supabase
-        .from('tabs')
-        .select('*')
+      const { data, error } = await supabase.from('tabs').select('*')
 
       if (error) {
         throw error
@@ -25,8 +23,7 @@ export const useTabsStore = defineStore('tabs', () => {
 
       tabs.value = data.sort((a, b) => a.order - b.order)
       activeTabId.value = tabs.value.length > 0 ? tabs.value[0].id : null
-    }
-    catch {
+    } catch {
       toast.error(t('console.tab_load_error'))
       tabs.value = []
     }
@@ -41,8 +38,7 @@ export const useTabsStore = defineStore('tabs', () => {
       .limit(1) // Sadece en üstteki (en büyük) değeri al
       .maybeSingle()
 
-    if (maxOrderError)
-      throw maxOrderError
+    if (maxOrderError) throw maxOrderError
 
     const newOrderNumber = (maxOrderData?.order || 0) + 1
 
@@ -58,13 +54,9 @@ export const useTabsStore = defineStore('tabs', () => {
   }
 
   const deleteTab = async (id: string) => {
-    const { error } = await supabase
-      .from('tabs')
-      .delete()
-      .eq('id', id)
+    const { error } = await supabase.from('tabs').delete().eq('id', id)
 
-    if (error)
-      throw error
+    if (error) throw error
 
     const newTabs = []
     for (const tab of tabs.value) {
@@ -76,14 +68,10 @@ export const useTabsStore = defineStore('tabs', () => {
   }
 
   const editTab = async (id: string, new_data: TabUpdate) => {
-    const result = await supabase
-      .from('tabs')
-      .update(new_data)
-      .eq('id', id)
-      .select()
+    const result = await supabase.from('tabs').update(new_data).eq('id', id).select()
 
     if (!result.error && result.data) {
-      const index = tabs.value.findIndex(tab => tab.id === id)
+      const index = tabs.value.findIndex((tab) => tab.id === id)
       if (index !== -1) {
         tabs.value[index] = result.data[0]
       }
@@ -94,13 +82,11 @@ export const useTabsStore = defineStore('tabs', () => {
   const swapTabs = async (newOrder: Tab[]) => {
     const updates = newOrder.map((tab, index) => ({
       ...tab,
-      order: index + 1,
+      order: index + 1
     }))
-    const result = await supabase
-      .from('tabs')
-      .upsert(updates, {
-        onConflict: 'id',
-      })
+    const result = await supabase.from('tabs').upsert(updates, {
+      onConflict: 'id'
+    })
 
     if (!result.error) {
       tabs.value = newOrder
@@ -116,9 +102,8 @@ export const useTabsStore = defineStore('tabs', () => {
     addTab,
     deleteTab,
     editTab,
-    swapTabs,
+    swapTabs
   }
 })
 
-if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useTabsStore as any, import.meta.hot))
+if (import.meta.hot) import.meta.hot.accept(acceptHMRUpdate(useTabsStore as any, import.meta.hot))

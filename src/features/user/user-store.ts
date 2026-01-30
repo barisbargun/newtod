@@ -27,8 +27,7 @@ export const useUserStore = defineStore('user', () => {
   async function logout() {
     const { error } = await supabase.auth.signOut()
 
-    if (error)
-      throw error
+    if (error) throw error
 
     setUser(null)
   }
@@ -37,9 +36,8 @@ export const useUserStore = defineStore('user', () => {
     user,
     isLoggedIn,
     setUser,
-    logout,
+    logout
   }
 })
 
-if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useUserStore as any, import.meta.hot))
+if (import.meta.hot) import.meta.hot.accept(acceptHMRUpdate(useUserStore as any, import.meta.hot))

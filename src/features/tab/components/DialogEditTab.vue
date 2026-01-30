@@ -17,9 +17,7 @@ function closeDialog() {
 <template>
   <Dialog :open="isDialogOpen" @update:open="isDialogOpen = $event">
     <DialogTrigger as-child>
-      <Button variant="ghost">
-        <Pencil /> {{ t('button.edit') }}
-      </Button>
+      <Button variant="ghost"> <Pencil /> {{ t('button.edit') }} </Button>
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>

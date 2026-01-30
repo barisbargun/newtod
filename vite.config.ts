@@ -22,26 +22,26 @@ export default defineConfig({
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
-      '@': path.resolve(__dirname, 'src'),
-    },
+      '@': path.resolve(__dirname, 'src')
+    }
   },
 
   plugins: [
     // https://github.com/posva/unplugin-vue-router
     VueRouter({
       extensions: ['.vue', '.md'],
-      dts: 'src/typed-router.d.ts',
+      dts: 'src/typed-router.d.ts'
     }),
 
     VueMacros({
       betterDefine: {
-        exclude: ['src/components/ui/**/*.vue'],
+        exclude: ['src/components/ui/**/*.vue']
       },
       plugins: {
         vue: Vue({
-          include: [/\.vue$/, /\.md$/],
-        }),
-      },
+          include: [/\.vue$/, /\.md$/]
+        })
+      }
     }),
     tailwindcss(),
 
@@ -60,18 +60,15 @@ export default defineConfig({
         {
           // add any other imports you were relying on
           'vue-router/auto': ['useLink'],
-          'pinia': ['storeToRefs'],
+          pinia: ['storeToRefs'],
           '@/features/tab/tab-store': ['useTabsStore'],
           '@/features/duty/duty-store': ['useDutiesStore'],
-          '@/features/user/user-store': ['useUserStore'],
-        },
+          '@/features/user/user-store': ['useUserStore']
+        }
       ],
       dts: 'src/auto-imports.d.ts',
-      dirs: [
-        'src/composables',
-        'src/stores',
-      ],
-      vueTemplate: true,
+      dirs: ['src/composables', 'src/stores'],
+      vueTemplate: true
     }),
 
     // https://github.com/antfu/unplugin-vue-components
@@ -81,7 +78,7 @@ export default defineConfig({
       extensions: ['vue', 'md'],
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-      dts: 'src/components.d.ts',
+      dts: 'src/components.d.ts'
     }),
 
     // https://github.com/unplugin/unplugin-vue-markdown
@@ -94,17 +91,19 @@ export default defineConfig({
           matcher: (link: string) => /^https?:\/\//.test(link),
           attrs: {
             target: '_blank',
-            rel: 'noopener',
-          },
+            rel: 'noopener'
+          }
         })
-        md.use(await Shiki({
-          defaultColor: false,
-          themes: {
-            light: 'vitesse-light',
-            dark: 'vitesse-dark',
-          },
-        }))
-      },
+        md.use(
+          await Shiki({
+            defaultColor: false,
+            themes: {
+              light: 'vitesse-light',
+              dark: 'vitesse-dark'
+            }
+          })
+        )
+      }
     }),
 
     // https://github.com/antfu/vite-plugin-pwa
@@ -119,21 +118,21 @@ export default defineConfig({
           {
             src: 'favicon/pwa-192x192.png',
             sizes: '192x192',
-            type: 'image/png',
+            type: 'image/png'
+          },
+          {
+            src: 'favicon/pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
           },
           {
             src: 'favicon/pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-          },
-          {
-            src: 'favicon/pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
-          },
-        ],
-      },
+            purpose: 'any maskable'
+          }
+        ]
+      }
     }),
 
     // https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n
@@ -141,18 +140,17 @@ export default defineConfig({
       runtimeOnly: true,
       compositionOnly: true,
       fullInstall: true,
-      include: [path.resolve(__dirname, 'locales/**')],
+      include: [path.resolve(__dirname, 'locales/**')]
     }),
 
     // https://github.com/webfansplz/vite-plugin-vue-devtools
-    VueDevTools(),
-
+    VueDevTools()
   ],
 
   // https://github.com/vitest-dev/vitest
   test: {
     include: ['test/**/*.test.ts'],
-    environment: 'jsdom',
+    environment: 'jsdom'
   },
 
   // https://github.com/antfu/vite-ssg
@@ -160,15 +158,15 @@ export default defineConfig({
     script: 'async',
     formatting: 'minify',
     beastiesOptions: {
-      reduceInlineStyles: false,
+      reduceInlineStyles: false
     },
     onFinished() {
       generateSitemap()
-    },
+    }
   },
 
   ssr: {
     // TODO: workaround until they support native ESM
-    noExternal: ['workbox-window', /vue-i18n/],
-  },
+    noExternal: ['workbox-window', /vue-i18n/]
+  }
 })

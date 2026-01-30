@@ -16,8 +16,7 @@ async function handleLogout() {
     isDialogOpen.value = false
 
     router.push('/auth/login')
-  }
-  catch (error) {
+  } catch (error) {
     toast.error(t('toast.an_error_happened', { msg: (error as PostgrestError).message }))
   }
 
@@ -28,7 +27,7 @@ async function handleLogout() {
 <template>
   <Dialog :open="isDialogOpen" @update:open="isDialogOpen = $event">
     <DialogTrigger as-child>
-      <Button variant="ghost" class="w-full block pl-2 text-left">
+      <Button variant="ghost" class="block w-full pl-2 text-left">
         {{ t('button.logout') }}
       </Button>
     </DialogTrigger>

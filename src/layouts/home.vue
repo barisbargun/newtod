@@ -4,7 +4,7 @@ const { user } = storeToRefs(userStore)
 </script>
 
 <template>
-  <div v-if="user" class="flex flex-col w-full overflow-hidden h-screen">
+  <div v-if="user" class="flex h-screen w-full flex-col overflow-hidden">
     <Navbar :user="user" />
     <RouterView />
     <Footer />

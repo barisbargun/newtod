@@ -13,14 +13,18 @@ const tabs = ref<Tab[]>([])
 const { t } = useI18n()
 const { swapTabs } = useTabsStore()
 
-watch(() => props.tabs, (newTabs) => {
-  if (Array.isArray(newTabs)) {
-    tabs.value = newTabs
+watch(
+  () => props.tabs,
+  (newTabs) => {
+    if (Array.isArray(newTabs)) {
+      tabs.value = newTabs
+    }
+  },
+  {
+    deep: true,
+    immediate: true
   }
-}, {
-  deep: true,
-  immediate: true,
-})
+)
 
 const isDialogOpen = ref(false)
 const isPending = ref(false)
@@ -31,8 +35,7 @@ async function handleSwap() {
   if (!result.error) {
     toast.success(t('toast.tab_swap_success'))
     isDialogOpen.value = false
-  }
-  else {
+  } else {
     toast.error(t('toast.an_error_happened', { msg: result.error.message }))
   }
   isPending.value = false
@@ -43,7 +46,7 @@ async function handleSwap() {
   <Dialog :open="isDialogOpen" @update:open="isDialogOpen = $event">
     <DialogTrigger as-child>
       <Button size="icon" variant="ghost">
-        <Pencil class="size-5 text-primary" />
+        <Pencil class="text-primary size-5" />
       </Button>
     </DialogTrigger>
     <DialogContent>
@@ -55,7 +58,7 @@ async function handleSwap() {
       </DialogHeader>
       <draggable v-model="tabs" tag="ol">
         <template #item="{ element }">
-          <li class="p-2 border mb-2 rounded-md cursor-move text-foreground">
+          <li class="text-foreground mb-2 cursor-move rounded-md border p-2">
             {{ element.name }}
           </li>
         </template>

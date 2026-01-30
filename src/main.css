@@ -6,7 +6,7 @@
 
 @layer base {
   * {
-    @apply m-0 box-border p-0 border-border;
+    @apply border-border m-0 box-border p-0;
   }
 
   html {
@@ -24,7 +24,7 @@
 }
 
 @utility container {
-  @apply mx-auto! max-w-[2200px]! px-4 xl:px-8 max-sm:px-4;
+  @apply mx-auto! max-w-[2200px]! px-4 max-sm:px-4 xl:px-8;
 }
 
 @utility flex-center {
