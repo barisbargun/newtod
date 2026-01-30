@@ -22,7 +22,7 @@ async function toggleLocales() {
   <header class="bg-card w-full border-b py-2">
     <div class="container flex items-center justify-between">
       <div class="flex items-center justify-center gap-2">
-        <img src="/assets/logo.avif" alt="logo" class="size-5 rounded-full" />
+        <img src="/favicon/favicon.svg" alt="logo" class="size-5 rounded-full dark:invert" />
         <RouterLink class="font-poppins font-medium" :to="{ name: '/' }">
           {{ site.title }}
         </RouterLink>

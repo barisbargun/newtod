@@ -12,7 +12,7 @@ useHead({
       {{ t('page_not_exist') }}
     </h1>
 
-    <p class="mx-auto mt-4 mb-3 text-lg leading-relaxed">
+    <p class="mx-auto mt-6 mb-4 text-lg leading-relaxed">
       {{ t('head_back_page') }}
     </p>
     <Button variant="outline" @click="router.back()">

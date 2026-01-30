@@ -8,7 +8,6 @@ const { user } = storeToRefs(userStore)
     <Navbar />
     <main class="flex w-full flex-1 flex-col">
       <RouterView />
-      <Footer />
     </main>
   </template>
   <Spinner v-else class="m-auto size-8" />

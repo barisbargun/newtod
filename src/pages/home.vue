@@ -25,7 +25,7 @@ onMounted(() => {
   <template v-if="!tabsStore.isLoading || !dutiesStore.isLoading">
     <div
       v-if="largerThanLg"
-      class="container mx-auto flex flex-1 justify-between gap-5 overflow-hidden py-4"
+      class="container mx-auto flex flex-1 justify-between gap-4 overflow-hidden py-4 xl:gap-6 xl:py-6"
     >
       <PanelSavedDuties class="flex-1/4 overflow-auto" />
       <PanelSchedule class="flex-1/2 overflow-auto" />
