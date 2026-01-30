@@ -1,6 +1,38 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      function waitUntilTranslationLoads() {
+        const savedLang = localStorage.getItem('user-locale')
+        const defaultLang = 'en'
+        if (savedLang && savedLang !== defaultLang) {
+          document.documentElement.classList.add('is-loading-lang')
+        }
+      }
+
+      function changeBackgroundColor() {
+        const savedTheme = localStorage.getItem('vueuse-color-scheme')
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        const isDark =
+          savedTheme === 'dark' || ((!savedTheme || savedTheme === 'auto') && prefersDark)
+
+        const lightBg = 'hsl(240 100% 98.0392%)'
+        const darkBg = 'hsl(240 26.8293% 8.0392%)'
+
+        document.documentElement.style.backgroundColor = isDark ? darkBg : lightBg
+      }
+
+      waitUntilTranslationLoads()
+      changeBackgroundColor()
+    </script>
+
+    <style>
+      .is-loading-lang body {
+        visibility: hidden !important;
+        opacity: 0 !important;
+      }
+    </style>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <meta name="msapplication-TileColor" content="#00aba9" />
@@ -29,16 +61,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
 
     <title>Newtod</title>
-
-    <script>
-      ;(function () {
-        const prefersDark =
-          window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-        const setting = localStorage.getItem('vueuse-color-scheme') || 'auto'
-        if (setting === 'dark' || (prefersDark && setting !== 'light'))
-          document.documentElement.classList.toggle('dark', true)
-      })()
-    </script>
   </head>
   <body>
     <div id="app"></div>

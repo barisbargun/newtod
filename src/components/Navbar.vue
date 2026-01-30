@@ -3,7 +3,7 @@ import type { User } from '~/features/user/user-store'
 import { ChevronDown, CircleUser, Languages, Moon, SunMedium } from 'lucide-vue-next'
 
 import { site } from '~/config/site'
-import { availableLocales, loadLanguageAsync } from '~/modules/i18n'
+import { availableLocales, setI18nLanguage} from '~/modules/i18n'
 
 defineProps<{
   user?: User
@@ -14,8 +14,7 @@ const { t, locale } = useI18n()
 async function toggleLocales() {
   const locales = availableLocales
   const newLocale = locales[(locales.indexOf(locale.value) + 1) % locales.length]
-  await loadLanguageAsync(newLocale)
-  locale.value = newLocale
+  setI18nLanguage(newLocale)
 }
 </script>
 

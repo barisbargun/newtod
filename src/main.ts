@@ -51,5 +51,11 @@ export const createApp = ViteSSG(
         next()
       }
     })
+
+    if (ctx.isClient) {
+      ctx.router.isReady().then(() => {
+        document.documentElement.classList.remove('is-loading-lang')
+      })
+    }
   }
 )
